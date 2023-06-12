@@ -1,10 +1,8 @@
 import { Loader } from "components/Loader/Loader";
+import { MovieList } from "components/MovieList/MovieList";
 import { STATUS } from "constants";
 import { getTrendingMovies } from "helpers/api"
-import { useState } from "react"
-import { useEffect } from "react"
-import { MovieCard } from "components/MovieCard/MovieCard";
-import { MovieList } from "components/MovieList/MovieList.styled";
+import { useState, useEffect } from "react"
 
 export const Home = () => {
     const [movies, setMovies] = useState([]);
@@ -14,14 +12,13 @@ export const Home = () => {
         async function fetchData() {
             try {
                 const movies = await getTrendingMovies();
-                setStatus(STATUS.RESOLVED);
                 setMovies(movies.results);
-                console.log(movies);
+                setStatus(STATUS.RESOLVED);
             } catch (e) {
                 setStatus(STATUS.REJECTED)
             }
         }
-        fetchData()
+        fetchData();
     }, []);
 
     if (status === STATUS.PENDING) {
@@ -29,14 +26,10 @@ export const Home = () => {
             <Loader />
         </>)
     } else if (status === STATUS.RESOLVED) {
-        return (<MovieList>
-            {movies.map(({ original_title, poster_path, vote_average, id }) =>
-            (<MovieCard
-                title={original_title}
-                poster={poster_path}
-                key={id}
-                rate={vote_average}
-            />))}
-        </MovieList>)
+        return (
+            <>
+            <MovieList movies={movies}/>
+            </>
+        )
     }
 }
