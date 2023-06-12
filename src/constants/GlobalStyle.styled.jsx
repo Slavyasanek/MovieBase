@@ -8,5 +8,6 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         font-size: 20px;
         min-width: 320px;
+        overflow: unset;
     }
 `

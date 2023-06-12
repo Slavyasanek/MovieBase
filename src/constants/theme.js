@@ -18,4 +18,5 @@ export const theme = Object.freeze({
     darkRed: '#440700',
     decorativeLight: '	#eeeeee',
     beige: '#e7cfcc',
+    darkGreen: '#295f48'
 })
