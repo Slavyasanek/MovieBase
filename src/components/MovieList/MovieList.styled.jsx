@@ -3,6 +3,7 @@ import { devices } from "constants";
 
 export const MovieList = styled.ul`
     padding-top: 80px;
+    padding-bottom: 80px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
