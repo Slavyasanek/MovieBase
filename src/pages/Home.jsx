@@ -5,12 +5,13 @@ import { getTrendingMovies } from "helpers/api"
 import { useState, useEffect } from "react"
 import ReactPaginate from 'react-paginate';
 import css from 'components/Pagination/Pagination.module.css';
+import { TypedTitle } from "components/TypedTitle/TypedTitle";
 
 export const Home = () => {
     const [movies, setMovies] = useState([]);
     const [status, setStatus] = useState(STATUS.IDLE);
     const [total, setTotal] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
         setStatus(STATUS.PENDING);
@@ -40,6 +41,7 @@ export const Home = () => {
     } else if (status === STATUS.RESOLVED) {
         return (
             <>
+            <TypedTitle typing={['Tranding', 1000, 'Trending', 800, 'Trending movies of the day']}/>
             <MovieList movies={movies} total={total} onChange={loadMore} />
             <ReactPaginate
             containerClassName={css.pagination__container}
