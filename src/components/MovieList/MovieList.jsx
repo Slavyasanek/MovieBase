@@ -1,8 +1,11 @@
 import  PropTypes  from "prop-types";
 import { MovieCard } from "components/MovieCard/MovieCard"
 import { ListWrapper } from "./MovieList.styled";
+import { useLocation } from "react-router-dom";
 
 export const MovieList = ({movies}) => {
+    const location = useLocation();
+
     return (
         <>
         <ListWrapper>
@@ -13,6 +16,7 @@ export const MovieList = ({movies}) => {
                 key={id}
                 rate={vote_average}
                 id={id}
+                path={{from: location}}
             />))}
         </ListWrapper>
         </>

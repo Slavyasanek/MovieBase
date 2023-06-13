@@ -20,7 +20,6 @@ export const Home = () => {
                 const pageFetch = currentPage + 1;
                 const movies = await getTrendingMovies(pageFetch);
                 setMovies(movies.results);
-                console.log(movies);
                 setStatus(STATUS.RESOLVED);
                 setTotal(movies.total_pages);
             } catch (e) {

@@ -4,7 +4,7 @@ const API_KEY = 'a5ff046cd300d2bbc6befba4bd859295';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const TRENDING = '/trending/movie/day';
 const SEARCH = '/search/movie';
-const MOVIE = 'movie/'
+const MOVIE = '/movie/'
 
 export const getTrendingMovies = async (page = 1) => {
     const searchParams = new URLSearchParams({

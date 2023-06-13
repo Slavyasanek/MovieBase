@@ -8,7 +8,7 @@ export const TypedTitle = ({ typing }) => {
             wrapper='h1'
             style={
                 {
-                    marginBottom: '20px',
+                    marginBottom: '10px',
                     color: '#440700',
                     fontSize: '26px'
                 }

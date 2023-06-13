@@ -10,7 +10,7 @@ import { useSearchParams } from "react-router-dom";
 import { TypedTitle } from "components/TypedTitle/TypedTitle";
 
 export const Movies = () => {
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState(null);
     const [status, setStatus] = useState(STATUS.IDLE);
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
@@ -31,12 +31,15 @@ export const Movies = () => {
                     const movies = await searchMovies(query, pageFetch);
                     setResults(movies.results);
                     setTotalPages(movies.total_pages);
-                    setStatus(STATUS.RESOLVED)
-                    console.log(movies);
+                    if (movies.results.length > 0) {
+                        setStatus(STATUS.RESOLVED)
+                    } else {
+                        setStatus('nothing')
+                    }
                 } catch (e) {
                     setStatus(STATUS.REJECTED)
                 }
-        }
+        };
         fetchData()
     }, [currentPage, query])
 
@@ -50,10 +53,11 @@ export const Movies = () => {
 
     return (<>
         <SearchBar searchFunc={handleQuery} />
+        {status === STATUS.IDLE && <><TypedTitle typing={['Search movies']} /></>}
         {status === STATUS.PENDING && <Loader />}
         {status === STATUS.RESOLVED &&
-            results.length > 0 ?
-            (<>
+            results.length &&
+            <>
                 <TypedTitle typing={['Results:', 800, `Results: ${query}`]} />
                 <MovieList movies={results} />
                 {totalPages > 1 && <ReactPaginate
@@ -71,6 +75,7 @@ export const Movies = () => {
                     previousLabel="<<"
                     forcePage={Number.parseInt(currentPage)}
                 />}
-            </>) : <TypedTitle typing={['No results']} />}
+            </> }
+        {status === 'nothing' && <TypedTitle typing={['No results']} />}
     </>)
 }
