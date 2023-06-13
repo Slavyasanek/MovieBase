@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef} from "react";
 import { SearchBar } from "components/SearchBar/SearchBar";
 import { Loader } from "components/Loader/Loader";
 import { MovieList } from "components/MovieList/MovieList";
@@ -23,7 +23,6 @@ export const Movies = () => {
         if (query !== queryRef.current) {
             setCurrentPage(0)
             queryRef.current = query
-            return;
         }
         setStatus(STATUS.PENDING);
         async function fetchData() {

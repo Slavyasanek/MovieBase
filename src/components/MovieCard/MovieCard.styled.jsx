@@ -23,7 +23,7 @@ export const Link = styled(NavLink)`
     position: relative;
 `
 
-export const Poster = styled.img`
+export const Poster = styled(motion.img)`
      height: 232px;
     width: 100%;
     object-fit: cover;

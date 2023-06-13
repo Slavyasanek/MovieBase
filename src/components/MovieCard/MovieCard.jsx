@@ -6,6 +6,11 @@ const cardVariants = {
     isOn: { opacity: 1, transition: { type: "spring" } },
 }
 
+const imgVariants = {
+    initial: {y: '-30%'},
+    isOn: { y: '0%', transition: { type: "spring" } },
+}
+
 export const MovieCard = ({ id, poster, title, rate }) => {
     const posterPath = 'https://image.tmdb.org/t/p/original';
     return (
@@ -14,7 +19,13 @@ export const MovieCard = ({ id, poster, title, rate }) => {
         animate={"isOn"}
         variants={cardVariants}>
             <Link to={id}>
-                <Poster src={poster ? `${posterPath}${poster}` : `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png`} alt={title} loading="lazy" />
+                <Poster 
+                src={poster ? `${posterPath}${poster}` 
+                : `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png`} 
+                alt={title} loading="lazy"
+                initial={"initial"}
+                animate={"isOn"}
+                variants={imgVariants} />
                 <Title>{title}</Title>
                 <Rate rateType={rate > 6 ? 'good' : 'bad'}>{rate.toFixed(1)}</Rate>
             </Link>
