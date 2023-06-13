@@ -1,9 +1,10 @@
 import { BackLink } from "components/BackLink/BackLink";
 import { Movie } from "components/Movie/Movie";
+import { OddInfo } from "components/OddInfo/OddInfo";
 import { getMovie } from "helpers/api";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 
 export const MovieDetails = () => {
     const [movie, setMovie] = useState(null);
@@ -16,7 +17,6 @@ export const MovieDetails = () => {
             try {
                 const movie = await getMovie(movieId);
                 setMovie(movie)
-                console.log(movie);
             } catch (e) {
                 return;
             }
@@ -28,6 +28,7 @@ export const MovieDetails = () => {
             <>
                 <BackLink to={backLink} />
                 <Movie film={movie} />
+                <OddInfo/>
             </>}
         <Outlet />
     </>)

@@ -5,6 +5,7 @@ export const MovieWrapper = styled.div`
 display: flex;
 flex-direction: column;
 gap: 20px;
+margin-bottom: 20px;
 @media screen and (${devices.tablet}){
     flex-direction: row;
     gap: 30px;
