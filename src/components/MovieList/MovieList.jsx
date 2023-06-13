@@ -1,9 +1,10 @@
 import  PropTypes  from "prop-types";
 import { MovieCard } from "components/MovieCard/MovieCard"
-import { ListWrapper } from "./MovieList.styled"
+import { ListWrapper } from "./MovieList.styled";
 
 export const MovieList = ({movies}) => {
     return (
+        <>
         <ListWrapper>
             {movies.map(({ original_title, poster_path, vote_average, id }) =>
             (<MovieCard
@@ -14,6 +15,7 @@ export const MovieList = ({movies}) => {
                 id={id}
             />))}
         </ListWrapper>
+        </>
     )
 }
 

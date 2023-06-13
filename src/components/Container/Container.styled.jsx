@@ -7,7 +7,7 @@ export const Container = styled.div`
     @media screen and (${devices.mobile}) {
         max-width: 320px;
         padding-left: 15px;
-    padding-right: 15px;
+        padding-right: 15px;
     }
     @media screen and (${devices.tablet}) {
       max-width: 768px;
@@ -15,4 +15,9 @@ export const Container = styled.div`
     @media screen and (${devices.desktop}){
         max-width: 1200px;
     }
+`
+
+export const Main = styled.main`
+    padding-top: 80px;
+    padding-bottom: 80px;
 `

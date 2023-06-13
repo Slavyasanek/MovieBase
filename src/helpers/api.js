@@ -6,9 +6,10 @@ const TRENDING = '/trending/movie/week';
 const SEARCH = '/search/movie';
 const MOVIE = 'movie/'
 
-export const getTrendingMovies = async () => {
+export const getTrendingMovies = async (page = 1) => {
     const searchParams = new URLSearchParams({
         api_key: API_KEY,
+        page: page
     })
     const response = await axios.get(`${BASE_URL}${TRENDING}?${searchParams}`)
     return response.data;
