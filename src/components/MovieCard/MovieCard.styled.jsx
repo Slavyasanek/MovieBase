@@ -24,16 +24,15 @@ export const Link = styled(NavLink)`
 `
 
 export const Poster = styled.img`
-/* 
-     height: 232px; */
+     /* height: 232px; */
     width: 100%;
     object-fit: cover;
-    /* /* @media screen and (${devices.tablet}) {
+     /* @media screen and (${devices.tablet}) {
         height: 370px;
-    } */
+    } 
     @media screen and (${devices.desktop}) {
         height: 426px;
-    }  
+    }   */
 `
 
 export const Title = styled.p`

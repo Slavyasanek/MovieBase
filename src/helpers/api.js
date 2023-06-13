@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_KEY = 'a5ff046cd300d2bbc6befba4bd859295';
 const BASE_URL = 'https://api.themoviedb.org/3';
-const TRENDING = '/trending/movie/week';
+const TRENDING = '/trending/movie/day';
 const SEARCH = '/search/movie';
 const MOVIE = 'movie/'
 

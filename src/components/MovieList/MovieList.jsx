@@ -6,9 +6,9 @@ export const MovieList = ({movies}) => {
     return (
         <>
         <ListWrapper>
-            {movies.map(({ original_title, poster_path, vote_average, id }) =>
+            {movies.map(({ title, poster_path, vote_average, id }) =>
             (<MovieCard
-                title={original_title}
+                title={title}
                 poster={poster_path}
                 key={id}
                 rate={vote_average}

@@ -6,7 +6,6 @@ export const HeaderWrapper = styled.header`
     background-color: ${props => props.theme.red};
     padding-top: 20px;
     padding-bottom: 20px;
-    min-width: 320px;
 `
 
 export const HeaderFlex = styled.div`
@@ -33,7 +32,7 @@ export const Logo = styled(NavLink)`
         }
      }
 `
-export const LogoTitle = styled.h1`
+export const LogoTitle = styled.h3`
     font-size: 26px;
     color: ${props => props.theme.beige};
     @media screen and (${devices.tablet}) {
