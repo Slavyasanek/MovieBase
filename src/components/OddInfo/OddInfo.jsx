@@ -1,13 +1,15 @@
-import { OptionList, OptionTitle, Option } from "./OddInfo.styled"
+import { OptionList, OptionTitle, Option, OddWrapper } from "./OddInfo.styled"
+import { BiCommentDots } from 'react-icons/bi';
+import { VscAccount } from 'react-icons/vsc';
 
 export const OddInfo = () => {
     return (
-        <>
-        <OptionTitle>View additional information</OptionTitle>
-        <OptionList>
-            <Option to="cast">Cast</Option>
-            <Option to="reviews">Reviews</Option>
-        </OptionList>
-        </>
+        <OddWrapper>
+            <OptionTitle>View additional information</OptionTitle>
+            <OptionList>
+                <Option to="cast"><VscAccount/> Cast</Option>
+                <Option to="reviews"><BiCommentDots/> Reviews</Option>
+            </OptionList>
+        </OddWrapper>
     )
 }

@@ -17,7 +17,7 @@ export const BtnBack = styled(Link)`
         width: 30px;
         height: 30px;
     }
-    &:hover, &:focus {
+    &:hover, &:focus, &.active {
         background-color: ${props => props.theme.beige};
         color: ${props => props.theme.darkRed};
     }
