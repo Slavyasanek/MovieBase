@@ -1,4 +1,5 @@
 import { TypeAnimation } from 'react-type-animation';
+import  PropTypes  from "prop-types";
 
 export const TypedTitle = ({ typing }) => {
     return (<>
@@ -15,4 +16,8 @@ export const TypedTitle = ({ typing }) => {
         />
     </>
     )
+}
+
+TypedTitle.propTypes = {
+    typing: PropTypes.array.isRequired
 }
