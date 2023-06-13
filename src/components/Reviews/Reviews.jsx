@@ -21,5 +21,6 @@ export const Reviews = () => {
 
     return (<>
     <CastTitle>Reviews</CastTitle>
+    {reviews && <p>reviews will be soon</p>}
     </>)
 }
