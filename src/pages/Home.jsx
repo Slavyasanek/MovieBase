@@ -42,7 +42,7 @@ export const Home = () => {
         return (
             <>
             <TypedTitle typing={['Tranding', 1000, 'Trending', 800, 'Trending movies of the day']}/>
-            <MovieList movies={movies} total={total} onChange={loadMore} />
+            <MovieList movies={movies}/>
             <ReactPaginate
             containerClassName={css.pagination__container}
             pageClassName={css.pagination__page}
