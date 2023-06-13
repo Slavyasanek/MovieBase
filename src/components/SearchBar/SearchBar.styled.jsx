@@ -6,6 +6,7 @@ export const Form = styled.form`
     flex-direction: row;
     justify-content: center;
     gap: 5px;
+    margin-bottom: 20px;
 `
 
 export const Search = styled.input`
