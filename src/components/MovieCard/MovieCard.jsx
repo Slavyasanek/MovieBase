@@ -14,7 +14,7 @@ export const MovieCard = ({ id, poster, title, rate }) => {
         animate={"isOn"}
         variants={cardVariants}>
             <Link to={id}>
-                <Poster src={`${posterPath}${poster}`} alt={title} loading="lazy" />
+                <Poster src={poster ? `${posterPath}${poster}` : `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png`} alt={title} loading="lazy" />
                 <Title>{title}</Title>
                 <Rate rateType={rate > 6 ? 'good' : 'bad'}>{rate.toFixed(1)}</Rate>
             </Link>
@@ -24,7 +24,7 @@ export const MovieCard = ({ id, poster, title, rate }) => {
 
 MovieCard.propTypes = {
     id: PropTypes.number,
-    poster: PropTypes.string.isRequired,
+    poster: PropTypes.string,
     title: PropTypes.string.isRequired,
     rate: PropTypes.number.isRequired
 }
