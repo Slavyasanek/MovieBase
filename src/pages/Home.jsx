@@ -6,8 +6,9 @@ import { useState, useEffect } from "react"
 import ReactPaginate from 'react-paginate';
 import css from 'components/Pagination/Pagination.module.css';
 import { TypedTitle } from "components/TypedTitle/TypedTitle";
+import { Error } from "components/Error/Error";
 
-export const Home = () => {
+const Home = () => {
     const [movies, setMovies] = useState([]);
     const [status, setStatus] = useState(STATUS.IDLE);
     const [total, setTotal] = useState(0);
@@ -20,8 +21,8 @@ export const Home = () => {
                 const pageFetch = currentPage + 1;
                 const movies = await getTrendingMovies(pageFetch);
                 setMovies(movies.results);
-                setStatus(STATUS.RESOLVED);
                 setTotal(movies.total_pages);
+                setStatus(STATUS.RESOLVED);
             } catch (e) {
                 setStatus(STATUS.REJECTED)
             }
@@ -34,9 +35,7 @@ export const Home = () => {
     }
 
     if (status === STATUS.PENDING) {
-        return (<>
-            <Loader />
-        </>)
+        return (<Loader />)
     } else if (status === STATUS.RESOLVED) {
         return (
             <>
@@ -59,5 +58,9 @@ export const Home = () => {
         />
             </>
         )
+    } else if (status === STATUS.REJECTED) {
+        return (<Error/>)
     }
 }
+
+export default Home;
