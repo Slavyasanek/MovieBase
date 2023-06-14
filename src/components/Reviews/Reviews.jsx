@@ -3,7 +3,7 @@ import { getMovieReviews } from "helpers/api";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 
-export const Reviews = () => {
+const Reviews = () => {
     const [reviews, setReviews] = useState([]);
     const {movieId} = useParams();
 
@@ -24,3 +24,5 @@ export const Reviews = () => {
     {reviews && <p>reviews will be soon</p>}
     </>)
 }
+
+export default Reviews;
