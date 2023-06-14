@@ -6,6 +6,8 @@ export const HeaderWrapper = styled.header`
     background-color: ${props => props.theme.red};
     padding-top: 20px;
     padding-bottom: 20px;
+    position: relative;
+    z-index: 9999;
 `
 
 export const HeaderFlex = styled.div`
