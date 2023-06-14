@@ -5,7 +5,7 @@ import { CastList, Actor, ActorCredits, Photo, CastTitle } from "./Cast.styled";
 import { imagePath } from "constants";
 import { MovieDetail } from "components/Movie/Movie.styled";
 
-export const Cast = () => {
+const Cast = () => {
     const [cast, setCast] = useState([]);
     const {movieId} = useParams();
 
@@ -34,3 +34,5 @@ export const Cast = () => {
         </CastList> : <p>No cast info</p>}
     </>)
 }
+
+export default Cast;
