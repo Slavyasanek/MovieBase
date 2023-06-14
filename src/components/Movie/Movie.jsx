@@ -1,5 +1,5 @@
 import { TypedTitle } from "components/TypedTitle/TypedTitle";
-import { MovieWrapper, Poster, MovieData, MovieDetail, Slogan, PosterWrapper } from "./Movie.styled"
+import { MovieWrapper, Poster, MovieData, MovieDetail, Slogan, PosterWrapper, Company, CompaniesList } from "./Movie.styled"
 import { imagePath } from "constants";
 
 export const Movie = ({ film, background }) => {
@@ -9,7 +9,7 @@ export const Movie = ({ film, background }) => {
 
     return (<MovieWrapper back={background}>
         <PosterWrapper>
-            <Poster src={poster_path ? `${imagePath.default}${poster_path}` : imagePath.sample} />
+            <Poster src={poster_path ? `${imagePath.default}${poster_path}` : imagePath.sample} alt={title} />
         </PosterWrapper>
         <MovieData>
             <li key={'title'}>
@@ -27,11 +27,16 @@ export const Movie = ({ film, background }) => {
             {release_date && <li key={release_date}>
                 <MovieDetail>Year:</MovieDetail> {formatDate}
             </li>}
-            {production_companies.length > 0 && <li key={'production'}>
-                <MovieDetail>Production:</MovieDetail> {production_companies.map(company => company.name).join(", ")}
-            </li>}
             {overview && <li key={'description'}>
                 <MovieDetail>Description:</MovieDetail> {overview}
+            </li>}
+            {production_companies.length > 0 && <li key={'production'}>
+                <MovieDetail>Production:</MovieDetail>
+                <CompaniesList>
+                    {production_companies.map(({ logo_path, name }) =>
+                        <li>{logo_path ? <Company src={`${imagePath.default}${logo_path}`} />
+                            : <p>{name},</p>}
+                        </li>)}</CompaniesList>
             </li>}
         </MovieData>
     </MovieWrapper>)

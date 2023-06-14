@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { imagePath } from "constants";
 
 export const MovieWrapper = styled.div`
-display: flex;
-flex-direction: column;
-gap: 20px;
-margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
 @media screen and (${devices.tablet}){
     flex-direction: row;
     gap: 30px;
@@ -68,10 +68,23 @@ export const MovieData = styled.ul`
      line-height: 1.2;
     }
 `
-
 export const MovieDetail = styled.span`
     background-color: ${props => props.theme.red};
     color: ${props => props.theme.beige};
     padding: 2px 3px;
     border-radius: 8px;
+    margin-right: 5px;
+`
+export const CompaniesList = styled.ul`
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+`
+
+export const Company = styled.img`
+    width: 50px;
+    filter: grayscale(50%);
+    @media screen and (${devices.desktop}) {
+        width: 120px;
+    }
 `

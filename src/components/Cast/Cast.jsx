@@ -11,7 +11,7 @@ import { Error } from "components/Error/Error";
 const Cast = () => {
     const [cast, setCast] = useState([]);
     const [status, setStatus] = useState(STATUS.IDLE);
-    const {movieId} = useParams();
+    const { movieId } = useParams();
 
     useEffect(() => {
         setStatus(STATUS.PENDING);
@@ -27,22 +27,22 @@ const Cast = () => {
         getCast();
     }, [movieId])
     if (status === STATUS.PENDING) {
-        return (<Loader/>)
+        return (<Loader />)
     } else if (status === STATUS.RESOLVED || status === STATUS.IDLE) {
         return (<>
             <CastTitle>Cast</CastTitle>
-       {cast.length > 0 ? <CastList>
-        {cast.map(({id, character, profile_path, name}) => (<Actor key={id}>
-            <Photo
-            src={profile_path ? `${imagePath.default}${profile_path}` : imagePath.sample} 
-            alt={character}/>
-            <ActorCredits><MovieDetail>Name:</MovieDetail> {name}</ActorCredits>
-            <ActorCredits><MovieDetail> Character:</MovieDetail> {character}</ActorCredits>
-            </Actor>))}
-        </CastList> : <p>No cast info</p>}
+            {cast.length > 0 ? <CastList>
+                {cast.map(({ id, character, profile_path, name }) => (<Actor key={id}>
+                    <Photo
+                        src={profile_path ? `${imagePath.default}${profile_path}` : imagePath.sample}
+                        alt={character} />
+                    {name && <ActorCredits><MovieDetail>Name:</MovieDetail> {name}</ActorCredits>}
+                    {character && <ActorCredits><MovieDetail> Character:</MovieDetail> {character}</ActorCredits>}
+                </Actor>))}
+            </CastList> : <p>No cast info</p>}
         </>)
     } else if (status === STATUS.REJECTED) {
-        return (<Error/>)
+        return (<Error />)
     }
 }
 
