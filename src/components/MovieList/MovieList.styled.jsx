@@ -3,6 +3,7 @@ import { devices } from "constants";
 
 export const ListWrapper = styled.ul`
     padding-bottom: 40px;
+    padding-top: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

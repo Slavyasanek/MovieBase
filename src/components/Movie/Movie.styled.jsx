@@ -1,5 +1,6 @@
 import { devices } from "constants";
 import styled from "styled-components";
+import { imagePath } from "constants";
 
 export const MovieWrapper = styled.div`
 display: flex;
@@ -12,6 +13,22 @@ margin-bottom: 20px;
 }
 @media screen and (${devices.desktop}) {
     gap: 50px;        
+}
+&::after{
+    content: "";
+    position: fixed;
+    width: 120%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: ${props => props.back ? `url(${imagePath.default}${props.back})` : `url(${imagePath.oddBackground})`};
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: blur(2px);
+    z-index: -1;
+    opacity: 0.3;
 }
 `
 export const PosterWrapper = styled.div`
