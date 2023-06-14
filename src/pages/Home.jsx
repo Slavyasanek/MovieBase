@@ -13,15 +13,15 @@ const Home = () => {
     const [movies, setMovies] = useState([]);
     const [status, setStatus] = useState(STATUS.IDLE);
     const [total, setTotal] = useState(0);
-    const [searchParams, setSearchParams] = useSearchParams({page: 0});
+    const [searchParams, setSearchParams] = useSearchParams({page: 1});
+    const [paginationPage, setPaginationPage] = useState(0);
     const currentPage = Number(searchParams.get("page"));
 
     useEffect(() => {
         setStatus(STATUS.PENDING);
         async function fetchData() {
             try {
-                const pageFetch = currentPage + 1;
-                const movies = await getTrendingMovies(pageFetch);
+                const movies = await getTrendingMovies(currentPage);
                 setMovies(movies.results);
                 setTotal(movies.total_pages);
                 setStatus(STATUS.RESOLVED);
@@ -34,7 +34,8 @@ const Home = () => {
     }, [currentPage]);
 
     const loadMore = (event) => {
-        setSearchParams({page: event.selected});
+        setSearchParams({page: event.selected + 1});
+        setPaginationPage(event.selected)
     }
 
     if (status === STATUS.PENDING) {
@@ -57,7 +58,7 @@ const Home = () => {
             pageRangeDisplayed={1}
             pageCount={total / movies.length}
             previousLabel="<<"
-            forcePage={currentPage}
+            forcePage={paginationPage}
         />
             </>
         )

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import { SearchBar } from "components/SearchBar/SearchBar";
 import { Loader } from "components/Loader/Loader";
 import { MovieList } from "components/MovieList/MovieList";
@@ -15,6 +15,8 @@ const Movies = () => {
     const [status, setStatus] = useState(STATUS.IDLE);
     const [totalPages, setTotalPages] = useState(0);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [paginationPage, setPaginationPage] = useState(0);
+
     const query = searchParams.get("query");
     const currentPage = Number(searchParams.get("page"));
 
@@ -26,30 +28,34 @@ const Movies = () => {
             queryRef.current = query;
         }
         setStatus(STATUS.PENDING);
+        console.log(currentPage);
         async function fetchData() {
-                try {
-                    const pageFetch = Number(currentPage) + 1;
-                    const movies = await searchMovies(query, pageFetch);
+            try {
+                const movies = await searchMovies(query, currentPage);
+                if (movies.results.length > 0) {
+                    setStatus(STATUS.RESOLVED);
                     setResults(movies.results);
                     setTotalPages(movies.total_pages);
-                    if (movies.results.length > 0) {
-                        setStatus(STATUS.RESOLVED)
-                    } else {
-                        setStatus('nothing')
-                    }
-                } catch (e) {
-                    setStatus(STATUS.REJECTED)
+                } else {
+                    setStatus('nothing');
+                    setResults([]);
+                    setTotalPages(0);
                 }
+            } catch (e) {
+                setStatus(STATUS.REJECTED)
+            }
         };
         fetchData()
     }, [currentPage, query])
 
     const handleQuery = (query) => {
-        setSearchParams({query, page: 0});
+        setSearchParams({ query, page: 1 });
+        setPaginationPage(0);
     }
 
     const loadMore = (event) => {
-        setSearchParams({query: queryRef.current, page: event.selected })
+        setSearchParams({ query: queryRef.current, page: event.selected + 1 });
+        setPaginationPage(event.selected);
     }
 
     return (<>
@@ -61,7 +67,7 @@ const Movies = () => {
             <>
                 <TypedTitle typing={['Results:', 800, `Results: ${query}`]} />
                 <MovieList movies={results} />
-                {totalPages > 1 && <ReactPaginate
+                <ReactPaginate
                     containerClassName={css.pagination__container}
                     pageClassName={css.pagination__page}
                     activeClassName={css.selected}
@@ -74,11 +80,11 @@ const Movies = () => {
                     pageRangeDisplayed={1}
                     pageCount={totalPages}
                     previousLabel="<<"
-                    forcePage={currentPage}
-                />}
-            </> }
+                    forcePage={paginationPage}
+                />
+            </>}
         {status === 'nothing' && <TypedTitle typing={['No results']} />}
-        {status === STATUS.REJECTED && <Error/>}
+        {status === STATUS.REJECTED && <Error />}
     </>)
 }
 
