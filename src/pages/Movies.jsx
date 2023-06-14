@@ -16,7 +16,7 @@ const Movies = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get("query");
-    const currentPage = searchParams.get("page");
+    const currentPage = Number(searchParams.get("page"));
 
     const queryRef = useRef(query)
     useEffect(() => {
@@ -74,7 +74,7 @@ const Movies = () => {
                     pageRangeDisplayed={1}
                     pageCount={totalPages}
                     previousLabel="<<"
-                    forcePage={Number.parseInt(currentPage)}
+                    forcePage={currentPage}
                 />}
             </> }
         {status === 'nothing' && <TypedTitle typing={['No results']} />}

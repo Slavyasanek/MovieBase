@@ -7,12 +7,14 @@ import ReactPaginate from 'react-paginate';
 import css from 'components/Pagination/Pagination.module.css';
 import { TypedTitle } from "components/TypedTitle/TypedTitle";
 import { Error } from "components/Error/Error";
+import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
     const [movies, setMovies] = useState([]);
     const [status, setStatus] = useState(STATUS.IDLE);
     const [total, setTotal] = useState(0);
-    const [currentPage, setCurrentPage] = useState(0);
+    const [searchParams, setSearchParams] = useSearchParams({page: 0});
+    const currentPage = Number(searchParams.get("page"));
 
     useEffect(() => {
         setStatus(STATUS.PENDING);
@@ -24,6 +26,7 @@ const Home = () => {
                 setTotal(movies.total_pages);
                 setStatus(STATUS.RESOLVED);
             } catch (e) {
+                console.log(e);
                 setStatus(STATUS.REJECTED)
             }
         }
@@ -31,7 +34,7 @@ const Home = () => {
     }, [currentPage]);
 
     const loadMore = (event) => {
-        setCurrentPage(event.selected);
+        setSearchParams({page: event.selected});
     }
 
     if (status === STATUS.PENDING) {
@@ -52,7 +55,7 @@ const Home = () => {
             nextLabel=">>"
             onPageChange={loadMore}
             pageRangeDisplayed={1}
-            pageCount={Math.ceil(total / movies.length)}
+            pageCount={total / movies.length}
             previousLabel="<<"
             forcePage={currentPage}
         />
