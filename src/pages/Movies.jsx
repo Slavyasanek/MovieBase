@@ -28,7 +28,6 @@ const Movies = () => {
             queryRef.current = query;
         }
         setStatus(STATUS.PENDING);
-        console.log(currentPage);
         async function fetchData() {
             try {
                 const movies = await searchMovies(query, currentPage);

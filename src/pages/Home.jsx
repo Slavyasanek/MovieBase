@@ -26,7 +26,6 @@ const Home = () => {
                 setTotal(movies.total_pages);
                 setStatus(STATUS.RESOLVED);
             } catch (e) {
-                console.log(e);
                 setStatus(STATUS.REJECTED)
             }
         }
