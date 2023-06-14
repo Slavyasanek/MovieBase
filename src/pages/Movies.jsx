@@ -8,26 +8,27 @@ import css from 'components/Pagination/Pagination.module.css';
 import { searchMovies } from "helpers/api";
 import { useSearchParams } from "react-router-dom";
 import { TypedTitle } from "components/TypedTitle/TypedTitle";
+import { Error } from "components/Error/Error";
 
-export const Movies = () => {
+const Movies = () => {
     const [results, setResults] = useState(null);
     const [status, setStatus] = useState(STATUS.IDLE);
     const [totalPages, setTotalPages] = useState(0);
-    const [currentPage, setCurrentPage] = useState(0);
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get("query");
+    const currentPage = searchParams.get("page");
 
     const queryRef = useRef(query)
     useEffect(() => {
         if (!query) return;
+
         if (query !== queryRef.current) {
-            setCurrentPage(0)
-            queryRef.current = query
+            queryRef.current = query;
         }
         setStatus(STATUS.PENDING);
         async function fetchData() {
                 try {
-                    const pageFetch = currentPage + 1;
+                    const pageFetch = Number(currentPage) + 1;
                     const movies = await searchMovies(query, pageFetch);
                     setResults(movies.results);
                     setTotalPages(movies.total_pages);
@@ -44,11 +45,11 @@ export const Movies = () => {
     }, [currentPage, query])
 
     const handleQuery = (query) => {
-        setSearchParams({query});
+        setSearchParams({query, page: 0});
     }
 
     const loadMore = (event) => {
-        setCurrentPage(event.selected)
+        setSearchParams({query: queryRef.current, page: event.selected })
     }
 
     return (<>
@@ -77,5 +78,8 @@ export const Movies = () => {
                 />}
             </> }
         {status === 'nothing' && <TypedTitle typing={['No results']} />}
+        {status === STATUS.REJECTED && <Error/>}
     </>)
 }
+
+export default Movies;
