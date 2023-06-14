@@ -1,12 +1,12 @@
 import { BackLink } from "components/BackLink/BackLink";
+import { Loader } from "components/Loader/Loader";
 import { Movie } from "components/Movie/Movie";
 import { OddInfo } from "components/OddInfo/OddInfo";
-import { getMovie } from "helpers/api";
-import { useState } from "react";
-import { useEffect } from "react";
+import { getMovie} from "helpers/api";
+import { Suspense, useState, useEffect } from "react";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
     const [movie, setMovie] = useState(null);
     const { movieId } = useParams();
     const location = useLocation();
@@ -16,20 +16,25 @@ export const MovieDetails = () => {
         async function getFilm() {
             try {
                 const movie = await getMovie(movieId);
-                setMovie(movie)
+                setMovie(movie);
             } catch (e) {
                 return;
             }
         }
         getFilm()
     }, [movieId])
+    
     return (<>
         {movie &&
             <>
                 <BackLink to={backLink} />
                 <Movie film={movie} />
-                <OddInfo/>
+                <OddInfo />
             </>}
-        <Outlet />
+        <Suspense fallback={<Loader />}>
+            <Outlet />
+        </Suspense>
     </>)
 }
+
+export default MovieDetails;
