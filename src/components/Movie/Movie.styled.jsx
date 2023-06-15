@@ -86,5 +86,7 @@ export const Company = styled.img`
     filter: grayscale(50%);
     @media screen and (${devices.desktop}) {
         width: 120px;
+        aspect-ratio: 3/2;
+        object-fit: contain;
     }
 `

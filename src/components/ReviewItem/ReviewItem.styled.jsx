@@ -46,6 +46,7 @@ display: flex;
 }
 @media screen and (${devices.desktop})  {
     width: 200px;
+    align-items: center;
 }
 `
 
@@ -66,6 +67,8 @@ padding: 5px 10px;
 font-size: 18px;
 word-break: break-all;
 width: fit-content;
+text-align: center;
+align-self: center;
 `
 export const SingleData = styled.p`
  font-size: 15px;

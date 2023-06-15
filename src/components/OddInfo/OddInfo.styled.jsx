@@ -14,6 +14,7 @@ export const OptionTitle = styled.p`
 export const OptionList = styled.ul`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
 `
 
