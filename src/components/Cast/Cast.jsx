@@ -7,6 +7,13 @@ import { MovieDetail } from "components/Movie/Movie.styled";
 import { STATUS } from "constants";
 import { Loader } from "components/Loader/Loader";
 import { Error } from "components/Error/Error";
+import { motion } from "framer-motion";
+
+const castVariants = {
+    initial: { opacity: 0 },
+    isOn: { opacity: 1, transition: { type: "spring" } },
+    exit: {opacity: 0}
+}
 
 const Cast = () => {
     const [cast, setCast] = useState([]);
@@ -29,7 +36,12 @@ const Cast = () => {
     if (status === STATUS.PENDING) {
         return (<Loader />)
     } else if (status === STATUS.RESOLVED || status === STATUS.IDLE) {
-        return (<>
+        return (<motion.div
+            initial={"initial"}
+            animate={"isOn"}
+            exit={"exit"}
+            variants={castVariants}
+        >
             <CastTitle>Cast</CastTitle>
             {cast.length > 0 ? <CastList>
                 {cast.map(({ id, character, profile_path, name }) => (<Actor key={id}>
@@ -40,7 +52,7 @@ const Cast = () => {
                     {character && <ActorCredits><MovieDetail> Character:</MovieDetail> {character}</ActorCredits>}
                 </Actor>))}
             </CastList> : <p>No cast info</p>}
-        </>)
+        </motion.div>)
     } else if (status === STATUS.REJECTED) {
         return (<Error />)
     }

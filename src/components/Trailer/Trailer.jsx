@@ -6,6 +6,12 @@ import { getMovieVideo } from "helpers/api";
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import { Video } from "./Trailer.styled";
+import { motion } from "framer-motion";
+
+const trailerVariants = {
+    initial: { opacity: 0 },
+    isOn: { opacity: 1, transition: { type: "spring" } },
+}
 
 const Trailer = () => {
     const [trailer, setTrailer] = useState(null);
@@ -16,8 +22,8 @@ const Trailer = () => {
         async function fetchData() {
             try {
                 const videos = await getMovieVideo(movieId)
-                const trailer = videos.results.find(({ name }) => name.toLowerCase() === 'official trailer' 
-                || name.toLowerCase() === 'official trailer 1');
+                const trailer = videos.results.find(({ name }) => name.toLowerCase() === 'official trailer'
+                    || name.toLowerCase() === 'official trailer 1');
                 setTrailer(trailer);
                 setStatus(STATUS.RESOLVED);
             } catch (e) {
@@ -34,16 +40,21 @@ const Trailer = () => {
     } else if (status === STATUS.IDLE) {
         return (<CastTitle>Official Trailer</CastTitle>)
     } else if (status === STATUS.RESOLVED) {
-        return (<>
+        return (<motion.div
+            initial={"initial"}
+            animate={"isOn"}
+            variants={trailerVariants}>
             <CastTitle>Official Trailer</CastTitle>
-            {trailer ? 
-            <Video
-            src={`https://www.youtube.com/embed/${trailer.key}`}
-            title="Official Trailer"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowFullScreen></Video>
-        : <p>No trailer available</p>}
-        </>)
+            {trailer ?
+                <Video
+                    src={`https://www.youtube.com/embed/${trailer.key}`}
+                    title="Official Trailer"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    referrerPolicy="no-referrer"
+                ></Video>
+                : <p>No trailer available</p>}
+        </motion.div>)
     }
 }
 

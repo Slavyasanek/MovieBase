@@ -7,6 +7,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { ReviewsList } from "./Reviews.styled";
 import { ReviewItem } from "components/ReviewItem/ReviewItem";
+import { motion } from "framer-motion";
+
+const reviewVariants = {
+    initial: { opacity: 0 },
+    isOn: { opacity: 1, transition: { type: "spring" } },
+}
 
 const Reviews = () => {
     const [reviews, setReviews] = useState([]);
@@ -33,12 +39,16 @@ const Reviews = () => {
     } else if (status === STATUS.REJECTED) {
         return (<Error />);
     } else if (status === STATUS.RESOLVED || status === STATUS.IDLE) {
-        return (<>
+        return (<motion.div
+            initial={"initial"}
+            animate={"isOn"}
+            variants={reviewVariants}
+        >
             <CastTitle>Reviews</CastTitle>
             {reviews.length <= 0 ? <p>No reviews available</p> : <ReviewsList>
-                {reviews.map(review => (<ReviewItem overview={review} key={review.id}/>))}
+                {reviews.map(review => (<ReviewItem overview={review} key={review.id} />))}
             </ReviewsList>}
-        </>)
+        </motion.div>)
     }
 }
 
