@@ -56,3 +56,11 @@ export const getMovieVideo= async (id) => {
     const response = await axios.get(`${BASE_URL}${MOVIE}${id}/videos?${searchParams}`);
     return response.data
 }
+
+export const getMovieSimilar = async (id) => {
+    const searchParams = new URLSearchParams({
+        api_key: API_KEY,
+    })
+    const response = await axios.get(`${BASE_URL}${MOVIE}${id}/similar?${searchParams}`);
+    return response.data
+}

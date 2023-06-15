@@ -21,7 +21,9 @@ const Home = () => {
         setStatus(STATUS.PENDING);
         async function fetchData() {
             try {
-                const movies = await getTrendingMovies(currentPage);
+                let page;
+                currentPage === 0 ? page = 1 : page = currentPage;
+                const movies = await getTrendingMovies(page);
                 setMovies(movies.results);
                 setTotal(movies.total_pages);
                 setStatus(STATUS.RESOLVED);

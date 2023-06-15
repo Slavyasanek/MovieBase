@@ -13,7 +13,16 @@ const MovieDetails = () => {
     const [status, setStatus] = useState(STATUS.IDLE);
     const { movieId } = useParams();
     const location = useLocation();
-    const backLink = useRef(location.state?.from || '/')
+    const backLink = useRef(location.state?.from || '/');
+
+    // useEffect(() => {
+    //     if (!location.state) {
+    //         return;
+    //     }
+    //     if(backLink.current.state !== location.state.from) {
+    //         backLink.current = location.state.from;
+    //     }
+    // }, [location]);
 
     useEffect(() => {
         setStatus(STATUS.PENDING);
@@ -28,6 +37,7 @@ const MovieDetails = () => {
         }
         getFilm()
     }, [movieId])
+
     if (status === STATUS.RESOLVED) {
         return (
             <>

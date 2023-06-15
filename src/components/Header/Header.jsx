@@ -7,7 +7,7 @@ export const Header = () => {
         <HeaderWrapper>
             <Container>
                 <HeaderFlex>
-                    <Logo to='/'>
+                    <Logo to="/">
                         <BiMoviePlay />
                         <LogoTitle>MovieBase</LogoTitle>
                     </Logo>

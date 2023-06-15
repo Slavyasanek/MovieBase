@@ -38,17 +38,18 @@ const Reviews = () => {
         return (<Loader />);
     } else if (status === STATUS.REJECTED) {
         return (<Error />);
-    } else if (status === STATUS.RESOLVED || status === STATUS.IDLE) {
+    } else if (status === STATUS.RESOLVED) {
         return (<motion.div
             initial={"initial"}
             animate={"isOn"}
-            variants={reviewVariants}
-        >
+            variants={reviewVariants}>
             <CastTitle>Reviews</CastTitle>
             {reviews.length <= 0 ? <p>No reviews available</p> : <ReviewsList>
                 {reviews.map(review => (<ReviewItem overview={review} key={review.id} />))}
             </ReviewsList>}
         </motion.div>)
+    } else if (status === STATUS.IDLE) {
+        return (<CastTitle>Reviews</CastTitle>)
     }
 }
 
