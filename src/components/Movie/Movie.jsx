@@ -30,13 +30,16 @@ export const Movie = ({ film, background }) => {
             {overview && <li key={'description'}>
                 <MovieDetail>Description:</MovieDetail> {overview}
             </li>}
-            {production_companies.length > 0 && <li key={'production'}>
-                <MovieDetail>Production:</MovieDetail>
-                <CompaniesList>
-                    {production_companies.map(({ logo_path, name, id }) =>
-                        <li key={id}>{logo_path && <Company src={`${imagePath.default}${logo_path}`} />}
-                        </li>)}</CompaniesList>
-            </li>}
+            {production_companies.length > 0 &&
+                <>
+                    <li key={'production'}> <MovieDetail>Production:</MovieDetail></li>
+                    <li key={'companies'}>
+                        <CompaniesList>
+                            {production_companies.map(({ logo_path, name, id }) =>
+                                <li key={id}>{logo_path && <Company src={`${imagePath.default}${logo_path}`} />}
+                                </li>)}</CompaniesList>
+                    </li>
+                </>}
         </MovieData>
     </MovieWrapper>)
 }
