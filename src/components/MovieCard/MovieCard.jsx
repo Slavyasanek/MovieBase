@@ -21,11 +21,12 @@ export const MovieCard = ({ id, poster, title, rate, path }) => {
                             ? `${imagePath.default}${poster}`
                             : imagePath.sample}
                         alt={title} 
+                        width="140"
                         loading="lazy" />
                     <Rate rateType={rate > 6 ? 'good' : 'bad'}>{rate.toFixed(1)}</Rate>
                 </PosterWrapper>
-                <Title>{title}</Title>
             </Link>
+            <Title>{title}</Title>
         </Card>
     )
 }

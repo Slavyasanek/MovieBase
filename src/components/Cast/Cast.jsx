@@ -41,8 +41,10 @@ const Cast = () => {
             exit={"exit"}
             variants={castVariants}>
             <CastTitle>Cast</CastTitle>
-            {cast.length > 0 ? <CastList>
-                {cast.map(({ id, character, profile_path, name }) => (<Actor key={id}>
+            {cast.length > 0 
+            ? <CastList>
+                {cast.map(({ id, character, profile_path, name }) => (
+                <Actor key={id}>
                     <PhotoWrapper>
                     <Photo
                         src={profile_path ? `${imagePath.default}${profile_path}` : imagePath.sample}

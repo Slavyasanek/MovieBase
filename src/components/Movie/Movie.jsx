@@ -4,11 +4,11 @@ import { MovieWrapper, Poster, MovieData, MovieDetail, Slogan, PosterWrapper, Co
 import { imagePath } from "constants";
 
 export const Movie = ({ film }) => {
-    const { poster_path, genres, overview, title, original_title, homepage, production_companies, release_date, tagline, background } = film;
+    const { poster_path, genres, overview, title, original_title, homepage, production_companies, release_date, tagline, backdrop_path} = film;
     const date = new Date(release_date);
     const formatDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
 
-    return (<MovieWrapper back={background}>
+    return (<MovieWrapper back={backdrop_path}>
         <PosterWrapper>
             <Poster src={poster_path ? `${imagePath.default}${poster_path}` : imagePath.sample} alt={title} />
         </PosterWrapper>
