@@ -28,7 +28,7 @@ const Movies = () => {
         if (query !== queryRef.current) {
             queryRef.current = query;
         }
-        setPaginationPage(currentPage + 1);
+        setPaginationPage(currentPage - 1);
         setStatus(STATUS.PENDING);
         async function fetchData() {
             try {
