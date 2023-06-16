@@ -18,6 +18,7 @@ const Home = () => {
     const currentPage = Number(searchParams.get("page"));
 
     useEffect(() => {
+        setPaginationPage(currentPage - 1);
         setStatus(STATUS.PENDING);
         async function fetchData() {
             try {
@@ -36,7 +37,6 @@ const Home = () => {
 
     const loadMore = (event) => {
         setSearchParams({page: event.selected + 1});
-        setPaginationPage(event.selected)
     }
 
     if (status === STATUS.PENDING) {

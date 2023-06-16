@@ -20,13 +20,15 @@ const Movies = () => {
     const query = searchParams.get("query");
     const currentPage = Number(searchParams.get("page"));
 
-    const queryRef = useRef(query)
+    const queryRef = useRef(query);
+    
     useEffect(() => {
         if (!query) return;
 
         if (query !== queryRef.current) {
             queryRef.current = query;
         }
+        setPaginationPage(currentPage + 1);
         setStatus(STATUS.PENDING);
         async function fetchData() {
             try {
@@ -54,7 +56,6 @@ const Movies = () => {
 
     const loadMore = (event) => {
         setSearchParams({ query: queryRef.current, page: event.selected + 1 });
-        setPaginationPage(event.selected);
     }
 
     return (<>
