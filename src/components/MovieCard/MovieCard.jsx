@@ -34,5 +34,6 @@ MovieCard.propTypes = {
     id: PropTypes.number,
     poster: PropTypes.string,
     title: PropTypes.string.isRequired,
-    rate: PropTypes.number.isRequired
+    rate: PropTypes.number.isRequired,
+    path: PropTypes.object.isRequired
 }

@@ -30,6 +30,7 @@ const MovieDetails = () => {
             try {
                 const movie = await getMovie(movieId);
                 setMovie(movie);
+                console.log(movie);
                 setStatus(STATUS.RESOLVED);
             } catch (e) {
                 setStatus(STATUS.REJECTED);
@@ -42,7 +43,7 @@ const MovieDetails = () => {
         return (
             <>
                 <BackLink to={backLink.current} />
-                <Movie film={movie} background={movie.backdrop_path} />
+                <Movie film={movie}/>
                 <OddInfo />
                 <Suspense fallback={<Loader />}>
                     <Outlet />

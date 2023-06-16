@@ -5,6 +5,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const TRENDING = '/trending/movie/day';
 const SEARCH = '/search/movie';
 const MOVIE = '/movie/'
+const COLLECTION ='/collection/';
 
 export const getTrendingMovies = async (page = 1) => {
     const searchParams = new URLSearchParams({
@@ -63,4 +64,12 @@ export const getMovieSimilar = async (id) => {
     })
     const response = await axios.get(`${BASE_URL}${MOVIE}${id}/similar?${searchParams}`);
     return response.data
+}
+
+export const getMovieCollection = async (id) => {
+    const searchParams = new URLSearchParams({
+        api_key: API_KEY,
+    })
+    const response = await axios.get(`${BASE_URL}${COLLECTION}${id}/?${searchParams}`);
+    return response.data;
 }

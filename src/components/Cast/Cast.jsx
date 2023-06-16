@@ -1,13 +1,12 @@
-import { getMovieCredits } from "helpers/api"
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
+import { motion } from "framer-motion";
+import { getMovieCredits } from "helpers/api"
 import { CastList, Actor, ActorCredits, Photo, CastTitle } from "./Cast.styled";
-import { imagePath } from "constants";
+import { imagePath, STATUS } from "constants";
 import { MovieDetail } from "components/Movie/Movie.styled";
-import { STATUS } from "constants";
 import { Loader } from "components/Loader/Loader";
 import { Error } from "components/Error/Error";
-import { motion } from "framer-motion";
 
 const castVariants = {
     initial: { opacity: 0 },
@@ -40,8 +39,7 @@ const Cast = () => {
             initial={"initial"}
             animate={"isOn"}
             exit={"exit"}
-            variants={castVariants}
-        >
+            variants={castVariants}>
             <CastTitle>Cast</CastTitle>
             {cast.length > 0 ? <CastList>
                 {cast.map(({ id, character, profile_path, name }) => (<Actor key={id}>

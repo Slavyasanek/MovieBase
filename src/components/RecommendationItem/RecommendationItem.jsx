@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { imagePath } from "constants";
 import { Poster, PosterWrapper, Recommandation, Title } from "./RecommendationItem.styled";
 import { Rate } from "components/MovieCard/MovieCard.styled";
@@ -15,4 +16,14 @@ export const RecommendationItem = ({ film, location }) => {
             <Title>{title}</Title>
         </Link>
     </Recommandation>)
+}
+
+RecommendationItem.propTypes = {
+    film: PropTypes.shape({
+        poster_path: PropTypes.string,
+        title: PropTypes.string,
+        vote_average: PropTypes.number,
+        id: PropTypes.number
+    }).isRequired,
+    location: PropTypes.object,
 }

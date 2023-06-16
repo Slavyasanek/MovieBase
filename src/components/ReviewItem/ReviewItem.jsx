@@ -1,4 +1,5 @@
 import { imagePath } from "constants";
+import PropTypes from "prop-types";
 import { Avatar, AvatarWrapper, Data, Review, Username, Comment, UserDetails, SingleData, Rate} from "./ReviewItem.styled";
 
 export const ReviewItem = ({ overview }) => {
@@ -25,4 +26,16 @@ export const ReviewItem = ({ overview }) => {
         </Data>
         <Comment>{content}</Comment>
     </Review>)
+}
+
+ReviewItem.propTypes = {
+    overview: PropTypes.shape({
+        author: PropTypes.string,
+        content: PropTypes.string.isRequired,
+        created_at: PropTypes.string,
+        author_details: PropTypes.shape({
+            avatar_path: PropTypes.string,
+            rating: PropTypes.number
+        }).isRequired
+    }).isRequired
 }

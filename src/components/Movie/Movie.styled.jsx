@@ -26,9 +26,10 @@ export const MovieWrapper = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    filter: blur(2px);
+    /* filter: blur(0px); */
     z-index: -1;
     opacity: 0.3;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1); 
 }
 `
 export const PosterWrapper = styled.div`
@@ -88,5 +89,20 @@ export const Company = styled.img`
         width: 120px;
         aspect-ratio: 3/2;
         object-fit: contain;
+    }
+`
+
+export const HomepageLink = styled.a`
+    text-decoration: underline;
+    font-weight: 700;
+    background-color: ${props => props.theme.beige};
+    color: ${props => props.theme.red};
+    padding: 2px 3px;
+    border-radius: 8px;
+    margin-right: 5px;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+    &:hover, &:focus {
+        background-color: ${props => props.theme.red};
+    color: ${props => props.theme.beige};
     }
 `
