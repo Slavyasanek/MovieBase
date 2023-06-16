@@ -22,8 +22,7 @@ const Trailer = () => {
         async function fetchData() {
             try {
                 const videos = await getMovieVideo(movieId)
-                const trailer = videos.results.find(({ name }) => name.toLowerCase() === 'official trailer'
-                    || name.toLowerCase() === 'official trailer 1');
+                const trailer = videos.results.find(({ name }) => name.toLowerCase().includes('official trailer'));
                 setTrailer(trailer);
                 setStatus(STATUS.RESOLVED);
             } catch (e) {
@@ -49,7 +48,7 @@ const Trailer = () => {
                 <Video
                     src={`https://www.youtube.com/embed/${trailer.key}`}
                     title="Official Trailer"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; web-share"
                     allowFullScreen
                     referrerPolicy="no-referrer"
                 ></Video>
