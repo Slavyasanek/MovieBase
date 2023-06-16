@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { NavLink } from 'react-router-dom';
 import { devices } from "constants";
 import { motion } from 'framer-motion';
 
@@ -19,20 +18,23 @@ export const Card = styled(motion.li)`
         transform: scale(1.04);
     }
 `
-export const Link = styled(NavLink)`
-    position: relative;
-`
 
-export const Poster = styled(motion.img)`
-     height: 232px;
+export const PosterWrapper = styled.div`
+    height: 232px;
     width: 100%;
-    object-fit: cover;
-     @media screen and (${devices.tablet}) {
+    position: relative;
+    @media screen and (${devices.tablet}) {
         height: 370px;
     } 
     @media screen and (${devices.desktop}) {
         height: 426px;
-    }  
+    } 
+`
+
+export const Poster = styled(motion.img)`
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 `
 
 export const Title = styled.p`
