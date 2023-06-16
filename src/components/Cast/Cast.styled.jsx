@@ -19,6 +19,8 @@ margin: 5px;
 display: flex;
 flex-direction: column;
 gap: 8px;
+padding: 5px;
+	box-sizing: border-box;
 @media screen and (${devices.tablet}){
     width: calc((100% - 10 * 5px) / 5);
 }
@@ -27,10 +29,17 @@ gap: 8px;
 }
 `
 
+export const PhotoWrapper = styled.div`
+    width: 100%;
+    height: 150px;
+    overflow: hidden; 
+`
+
 export const Photo = styled.img`
-width: 100%;
-height: 150px;
-object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 `
 
 export const ActorCredits = styled.p`

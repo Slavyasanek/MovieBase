@@ -8,10 +8,10 @@ export const Card = styled(motion.li)`
     background-color: ${props => props.theme.decorativeLight};
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1); 
     @media screen and (${devices.tablet}){
-        width: calc((100% - 5px * 8) / 3);
+        width: calc((100% - 5px * 6) / 3);
     }
     @media screen and (${devices.desktop}) {
-        width: calc((100% - 8px * 10) / 4);
+        width: calc((100% - 8px * 8) / 4);
         margin: 8px;
     }
     &:hover, &:focus {
@@ -20,21 +20,25 @@ export const Card = styled(motion.li)`
 `
 
 export const PosterWrapper = styled.div`
-    height: 232px;
-    width: 100%;
     position: relative;
+    overflow: hidden;
+    max-height: 232px;
+    width: 100%;
+    height: 100%;
     @media screen and (${devices.tablet}) {
-        height: 370px;
+        max-height: 370px;
     } 
     @media screen and (${devices.desktop}) {
-        height: 426px;
+        max-height: 426px;
     } 
 `
 
 export const Poster = styled(motion.img)`
     object-fit: cover;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
+    display: block;
+    image-rendering: crisp-edges;
 `
 
 export const Title = styled.p`

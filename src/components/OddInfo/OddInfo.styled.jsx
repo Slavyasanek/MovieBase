@@ -12,7 +12,7 @@ export const OptionTitle = styled.p`
     font-weight: 700;
 `
 
-export const OptionList = styled.ul`
+export const OptionList = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
