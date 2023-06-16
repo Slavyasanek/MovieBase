@@ -22,7 +22,7 @@ export const MovieWrapper = styled.div`
     top: 0;
     left: 0;
     background: ${props => props.back ? `url(${imagePath.default}${props.back})` : `url(${imagePath.oddBackground})`};
-    background-size: 100vw 100vh;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
