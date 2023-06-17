@@ -70,6 +70,6 @@ export const getMovieCollection = async (id) => {
     const searchParams = new URLSearchParams({
         api_key: API_KEY,
     })
-    const response = await axios.get(`${BASE_URL}${COLLECTION}${id}/?${searchParams}`);
+    const response = await axios.get(`${BASE_URL}${COLLECTION}${id}?${searchParams}`);
     return response.data;
 }

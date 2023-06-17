@@ -6,8 +6,8 @@ export const Container = styled.div`
     min-width: 320px;
     @media screen and (${devices.mobile}) {
         max-width: 320px;
-        padding-left: 15px;
-        padding-right: 15px;
+        /* padding-left: 15px;
+        padding-right: 15px; */
     }
     @media screen and (${devices.tablet}) {
       max-width: 768px;

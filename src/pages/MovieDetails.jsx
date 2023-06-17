@@ -13,16 +13,18 @@ const MovieDetails = () => {
     const [status, setStatus] = useState(STATUS.IDLE);
     const { movieId } = useParams();
     const location = useLocation();
-    const backLink = useRef(location.state?.from || '/');
+    const backLink = useRef([location.state?.from || '/']);
 
-    // useEffect(() => {
-    //     if (!location.state) {
-    //         return;
-    //     }
-    //     if(backLink.current.state !== location.state.from) {
-    //         backLink.current = location.state.from;
-    //     }
-    // }, [location]);
+    useEffect(() => {
+        console.log(`previous`, backLink.current);
+        if (!location.state) {
+            return;
+        }
+        if(backLink.current[backLink.current.length - 1].state !== location.state.from) {
+            backLink.current.push(location.state.from)
+        }
+        console.log(`next`, backLink.current);
+    }, [location]);
 
     useEffect(() => {
         setStatus(STATUS.PENDING);
@@ -30,7 +32,6 @@ const MovieDetails = () => {
             try {
                 const movie = await getMovie(movieId);
                 setMovie(movie);
-                console.log(movie);
                 setStatus(STATUS.RESOLVED);
             } catch (e) {
                 setStatus(STATUS.REJECTED);
@@ -39,12 +40,16 @@ const MovieDetails = () => {
         getFilm()
     }, [movieId])
 
+    const reduceLocation = () => {
+        backLink.current.pop();
+    }
+
     if (status === STATUS.RESOLVED) {
         return (
             <>
-                <BackLink to={backLink.current} />
+                <BackLink to={backLink.current[backLink.current.length - 1]} onClick={reduceLocation} />
                 <Movie film={movie}/>
-                <OddInfo />
+                <OddInfo other={movie.belongs_to_collection} />
                 <Suspense fallback={<Loader />}>
                     <Outlet />
                 </Suspense>

@@ -39,3 +39,10 @@ export const Poster = styled.img`
         font-size: 20px;
     }
 `
+
+export const RecommendationList = styled.ul`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: -5px;
+`

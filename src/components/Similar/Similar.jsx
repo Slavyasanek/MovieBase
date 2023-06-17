@@ -6,8 +6,9 @@ import { getMovieSimilar } from "helpers/api";
 import { useEffect, useState} from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { SimilarList } from "./Similar.styled";
 import { RecommendationItem } from "components/RecommendationItem/RecommendationItem";
+import { RecommendationList } from "components/RecommendationItem/RecommendationItem.styled";
+
 
 const similarVariants = {
     initial: { opacity: 0 },
@@ -42,13 +43,13 @@ const Similar = () => {
             animate={"isOn"}
             variants={similarVariants}>
             <CastTitle>Suggestions for you based on current movie</CastTitle>
-            {recommendation.length > 0 ? <SimilarList>
+            {recommendation.length > 0 ? <RecommendationList>
                 {recommendation.map(item => 
                 <RecommendationItem 
                 film={item} 
                 key={item.id} 
                 location={location}/>)}
-            </SimilarList> : <p>No matches with this film</p>}
+            </RecommendationList> : <p>No matches with this film</p>}
         </motion.div>)
     } else if (status === STATUS.REJECTED) {
         return (<Error />);
