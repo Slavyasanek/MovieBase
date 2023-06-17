@@ -22,7 +22,9 @@ export const Card = styled(motion.li)`
 
 export const PosterWrapper = styled.div`
     position: relative;
-    overflow: hidden;
+`
+
+export const Poster = styled(motion.img)`
     height: 232px;
     width: 100%;
     @media screen and (${devices.tablet}) {
@@ -31,13 +33,6 @@ export const PosterWrapper = styled.div`
     @media screen and (${devices.desktop}) {
         height: 426px;
     } 
-`
-
-export const Poster = styled(motion.img)`
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    display: block;
 `
 
 export const Title = styled.p`
