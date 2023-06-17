@@ -16,14 +16,12 @@ const MovieDetails = () => {
     const backLink = useRef([location.state?.from || '/']);
 
     useEffect(() => {
-        console.log(`previous`, backLink.current);
         if (!location.state) {
             return;
         }
-        if(backLink.current[backLink.current.length - 1].state !== location.state.from) {
+        if (backLink.current[backLink.current.length - 1] !== location.state.from) {
             backLink.current.push(location.state.from)
         }
-        console.log(`next`, backLink.current);
     }, [location]);
 
     useEffect(() => {
@@ -48,16 +46,16 @@ const MovieDetails = () => {
         return (
             <>
                 <BackLink to={backLink.current[backLink.current.length - 1]} onClick={reduceLocation} />
-                <Movie film={movie}/>
+                <Movie film={movie} />
                 <OddInfo other={movie.belongs_to_collection} />
                 <Suspense fallback={<Loader />}>
                     <Outlet />
                 </Suspense>
             </>)
     } else if (status === STATUS.PENDING) {
-        return (<Loader/>)
+        return (<Loader />)
     } else if (status === STATUS.REJECTED) {
-        return (<Error/>)
+        return (<Error />)
     }
 }
 export default MovieDetails;
