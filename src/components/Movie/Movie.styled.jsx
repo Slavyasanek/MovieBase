@@ -17,7 +17,7 @@ export const MovieWrapper = styled.div`
 &::after{
     content: "";
     position: fixed;
-    width: 120%;
+    width: 100%;
     height: 100%;
     top: 0;
     left: 0;
@@ -25,10 +25,13 @@ export const MovieWrapper = styled.div`
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     z-index: -1;
     opacity: 0.3;
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1); 
+    @media screen and (${devices.tablet}) {
+        background-attachment: fixed;
+    }
 }
 `
 export const PosterWrapper = styled.div`

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { motion } from "framer-motion";
 import { getMovieCredits } from "helpers/api"
-import { CastList, Actor, ActorCredits, Photo, CastTitle, PhotoWrapper } from "./Cast.styled";
+import { CastList, Actor, ActorCredits, Photo, CastTitle } from "./Cast.styled";
 import { imagePath, STATUS } from "constants";
 import { MovieDetail } from "components/Movie/Movie.styled";
 import { Loader } from "components/Loader/Loader";
@@ -45,11 +45,10 @@ const Cast = () => {
             ? <CastList>
                 {cast.map(({ id, character, profile_path, name }) => (
                 <Actor key={id}>
-                    <PhotoWrapper>
                     <Photo
                         src={profile_path ? `${imagePath.default}${profile_path}` : imagePath.sample}
-                        alt={character} />
-                    </PhotoWrapper>
+                        alt={character}
+                        height={150} />
                     {name && <ActorCredits><MovieDetail>Name:</MovieDetail> {name}</ActorCredits>}
                     {character && <ActorCredits><MovieDetail> Character:</MovieDetail> {character}</ActorCredits>}
                 </Actor>))}

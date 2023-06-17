@@ -29,17 +29,14 @@ padding: 5px;
 }
 `
 
-export const PhotoWrapper = styled.div`
-    width: 100%;
-    height: 150px;
-    overflow: hidden; 
-`
-
 export const Photo = styled.img`
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 150px;
+    object-fit: contain;
     object-position: center;
+    @media screen and (${devices.tablet}){
+        height: 200px;
+    }
 `
 
 export const ActorCredits = styled.p`

@@ -16,8 +16,10 @@ export const Recommandation = styled.li`
 export const PosterWrapper = styled.div`
     position: relative;
     border: 2px solid ${p => p.theme.beige};
+`
+
+export const Poster = styled.img`
     height: 200px;
-    overflow: hidden;
     width: 100%;
     @media screen and (${devices.tablet}) {
         height: 250px;
@@ -25,12 +27,6 @@ export const PosterWrapper = styled.div`
     @media screen and (${devices.desktop}) {
         height: 320px;
     }
-`
-
-export const Poster = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 `
 
     export const Title = styled.p`
