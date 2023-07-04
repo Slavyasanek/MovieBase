@@ -2,7 +2,7 @@
   "name": "moviebase",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://slavyasanek.github.io/moviebase/",
+  "homepage": "https://slavyasanek.github.io/MovieBase/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
