@@ -7,16 +7,56 @@ export const HeaderWrapper = styled.header`
     padding-top: 20px;
     padding-bottom: 20px;
     position: relative;
-    z-index: 9999;
+    z-index: 99;
 `
 
 export const HeaderFlex = styled.div`
     @media screen and (${devices.tablet}) {
         display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    @media screen and (${devices.desktop}) {
         flex-direction: row;
-        gap: 80px;
+        justify-content: space-between;
     }
 `
+
+export const NavContainer = styled.div`
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    @media screen and (${devices.desktop}) {
+        gap: 80px;
+    }
+`;
+
+export const MobileButton = styled.button`
+    background-color: ${p => p.theme.decorativeLight};
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    &:hover, &:focus, &:active {
+        background-color: ${p => p.theme.beige};
+    }
+    & > svg {
+        width: 20px;
+        height: 20px;
+        color: ${p => p.theme.darkRed};
+    }
+`
+
+export const Features = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+`;
+
 
 export const Logo = styled(NavLink)`
     display: flex;
@@ -56,6 +96,7 @@ export const Link = styled(NavLink)`
     color: ${props => props.theme.beige};
     padding: 8px;
     border-radius: 8px;
+    width: fit-content;
     &.active {
         background-color: ${props => props.theme.darkRed};
     }
