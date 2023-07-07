@@ -17,6 +17,6 @@ export const Pagination = styled.div`
     display: flex;
     flex-direction: column;
     @media screen and (${devices.desktop}) {
-        min-width: 900px;
+        min-width: 800px;
     }
 `;

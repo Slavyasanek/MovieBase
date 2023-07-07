@@ -25,7 +25,7 @@ export const PosterWrapper = styled.div`
 `
 
 export const Poster = styled(motion.img)`
-    height: 232px;
+    height: 220px;
     width: 100%;
     @media screen and (${devices.tablet}) {
         height: 370px;

@@ -8,8 +8,8 @@ const size = {
 
 export const devices = {
     mobile: `min-width: ${size.mobile}`,
-    maxTablet: `max-width: ${size.tablet}`,
-    tablet: `min-width: ${size.maxTablet}`,
+    maxTablet: `max-width: ${size.maxTablet}`,
+    tablet: `min-width: ${size.tablet}`,
     maxDesktop: `max-width: ${size.maxDesktop}`,
     desktop: `min-width: ${size.desktop}`
 }
@@ -21,7 +21,6 @@ export const lightTheme = Object.freeze({
     decorativeLight: '#eeeeee',
     beige: '#e7cfcc',
     greyRed: '	#ae3333',
-    greyPink: '	#e1aaaa'
 })
 
 export const darkTheme = Object.freeze({
@@ -31,5 +30,4 @@ export const darkTheme = Object.freeze({
     decorativeLight: '#18122B',
     beige: '#DDE6ED',
     greyRed: '	#635985',
-    greyPink: '	#E5383B'
 })

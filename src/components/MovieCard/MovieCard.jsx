@@ -29,7 +29,7 @@ export const MovieCard = ({ id, poster, title, rate, path }) => {
                         loading="lazy" />
                     <Rate rateType={rate <= 0 ? 'coming' : rate > 6 ? 'good' : 'bad'}>
                         {rate > 0 ? rate.toFixed(1) 
-                        : (currentLanguage === LANGUAGES.ENG ? 'no rate' : 'скоро')}</Rate>
+                        : (currentLanguage === LANGUAGES.ENG ? 'soon' : 'скоро')}</Rate>
                 </PosterWrapper>
             </Link>
             <Title>{title}</Title>

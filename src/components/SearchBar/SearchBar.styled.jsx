@@ -6,7 +6,7 @@ export const Form = styled.form`
     flex-direction: row;
     justify-content: center;
     gap: 5px;
-    @media screen and (${devices.maxDesktop}) {
+    @media screen and (${devices.maxTablet}) {
         margin-top: 20px;
     }
 `
@@ -17,6 +17,7 @@ export const Search = styled.input`
     border-radius: 8px;
     background-color: ${p =>  p.theme.greyRed};
     border: 2px solid ${props => props.theme.red};
+    color: ${p => p.theme.mainFont};
     outline: none;
     font-size: 20px;
     font-family: 'Anonymous Pro', monospace;

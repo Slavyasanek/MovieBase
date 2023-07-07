@@ -1,7 +1,6 @@
 import { Link } from "components/Header/Header.styled"
 import { CloseButton, Links, Menu } from "./MobileMenu.styled"
 import { AiOutlineClose } from 'react-icons/ai';
-import { AnimatePresence } from "framer-motion";
 import { ThemeSwitcher } from "components/ThemeSwitcher/ThemeSwitcher";
 import { MobileBackdrop } from "components/Filters/Filters.styled";
 import { backdropVariants } from "components/Filters/Filters";
@@ -11,7 +10,7 @@ import { LanguageSwitcher } from "components/LanguageSwitcher/LanguageSwitcher";
 const menuAppearance = {
     initial: { x: '100%' },
     isOn: { x: '0%' },
-    exit: { x: '-100%' },
+    exit: { x: '100%' },
 }
 
 export const MobileMenu = ({ handleOpen }) => {
@@ -21,8 +20,7 @@ export const MobileMenu = ({ handleOpen }) => {
     }, []);
 
 
-    return (<>
-        <AnimatePresence><MobileBackdrop
+    return (<MobileBackdrop
             initial={"initial"}
             animate={"isOn"}
             exit={"exit"}
@@ -37,10 +35,10 @@ export const MobileMenu = ({ handleOpen }) => {
                 <Links>
                     <Link to="/">Home</Link>
                     <Link>Popular</Link>
+                    <Link to="/movies">Movies</Link>
                 </Links>
                 <ThemeSwitcher />
                 <LanguageSwitcher/>
             </Menu>
-        </MobileBackdrop></AnimatePresence>
-    </>)
+        </MobileBackdrop>)
 }

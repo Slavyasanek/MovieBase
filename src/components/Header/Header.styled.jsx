@@ -1,6 +1,7 @@
 import { devices } from "constants";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export const HeaderWrapper = styled.header`
     background-color: ${props => props.theme.red};
@@ -8,6 +9,7 @@ export const HeaderWrapper = styled.header`
     padding-bottom: 20px;
     position: relative;
     z-index: 99;
+    width: 100vw;
 `
 
 export const HeaderFlex = styled.div`
@@ -54,7 +56,48 @@ export const MobileButton = styled.button`
 export const Features = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
+    position: relative;
+    @media screen and (${devices.tablet}) and (${devices.maxDesktop}){
+        margin-top: 8px;
+    }
+`;
+
+export const Settings = styled(motion.div)`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    bottom: -100%;
+    background-color: ${p => p.theme.red};
+    padding: 10px 20px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+`;
+
+export const SettingsOpen = styled.button`
+    background-color: ${p => p.theme.beige};
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    &:hover, &:focus, &:active {
+        background-color: ${p => p.theme.greyRed};
+    }
+    & > svg {
+        width: 20px;
+        height: 20px;
+        color: ${p => p.theme.red};
+    }
 `;
 
 
@@ -86,7 +129,7 @@ export const Nav = styled.nav`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 8px;
     @media screen and (${devices.maxTablet}){
         margin-top: 20px;
     }
@@ -97,10 +140,11 @@ export const Link = styled(NavLink)`
     padding: 8px;
     border-radius: 8px;
     width: fit-content;
+    font-size: 20px;
     &.active {
         background-color: ${props => props.theme.darkRed};
     }
     @media screen and (${devices.tablet}) {
-        font-size: 24px;
+        font-size: 18px;
     }
 `
