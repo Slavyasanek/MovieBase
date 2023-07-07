@@ -1,75 +1,62 @@
-import axios from "axios";
+import { instance } from "./instance";
+import { ROUTES } from "./routes";
 
-const API_KEY = 'a5ff046cd300d2bbc6befba4bd859295';
-const BASE_URL = 'https://api.themoviedb.org/3';
-const TRENDING = '/trending/movie/day';
-const SEARCH = '/search/movie';
-const MOVIE = '/movie/'
-const COLLECTION ='/collection/';
-
-export const getTrendingMovies = async (page = 1) => {
+export const getTrendingMovies = async (page = 1, language = 'en-US') => {
     const searchParams = new URLSearchParams({
-        api_key: API_KEY,
-        page: page
+        page: page,
+        language: language,
     })
-    const response = await axios.get(`${BASE_URL}${TRENDING}?${searchParams}`)
+    const response = await instance.get(`${ROUTES.TRENDING}?${searchParams}`)
     return response.data;
 }
 
 export const searchMovies = async (query, page = 1) => {
     const searchParams = new URLSearchParams({
-        api_key: API_KEY,
         query: query, 
         page: page
     })
-    const response = await axios.get(`${BASE_URL}${SEARCH}?${searchParams}`);
+    const response = await instance.get(`${ROUTES.SEARCH}?${searchParams}`);
     return response.data
 }
 
 export const getMovie = async (id) => {
-    const searchParams = new URLSearchParams({
-        api_key: API_KEY,
-    })
-    const response = await axios.get(`${BASE_URL}${MOVIE}${id}?${searchParams}`);
+    const response = await instance.get(`${ROUTES.MOVIE}${id}`);
     return response.data
 }
 
 export const getMovieReviews = async (id) => {
-    const searchParams = new URLSearchParams({
-        api_key: API_KEY,
-    })
-    const response = await axios.get(`${BASE_URL}${MOVIE}${id}/reviews?${searchParams}`);
+    const response = await instance.get(`${ROUTES.MOVIE}${id}/reviews`);
     return response.data
 }
 
 export const getMovieCredits = async (id) => {
-    const searchParams = new URLSearchParams({
-        api_key: API_KEY,
-    })
-    const response = await axios.get(`${BASE_URL}${MOVIE}${id}/credits?${searchParams}`);
+    const response = await instance.get(`${ROUTES.MOVIE}${id}/credits`);
     return response.data
 }
 
 export const getMovieVideo= async (id) => {
-    const searchParams = new URLSearchParams({
-        api_key: API_KEY,
-    })
-    const response = await axios.get(`${BASE_URL}${MOVIE}${id}/videos?${searchParams}`);
+    const response = await instance.get(`${ROUTES.MOVIE}${id}/videos`);
     return response.data
 }
 
 export const getMovieSimilar = async (id) => {
-    const searchParams = new URLSearchParams({
-        api_key: API_KEY,
-    })
-    const response = await axios.get(`${BASE_URL}${MOVIE}${id}/similar?${searchParams}`);
+    const response = await instance.get(`${ROUTES.MOVIE}${id}/similar`);
     return response.data
 }
 
 export const getMovieCollection = async (id) => {
-    const searchParams = new URLSearchParams({
-        api_key: API_KEY,
-    })
-    const response = await axios.get(`${BASE_URL}${COLLECTION}${id}?${searchParams}`);
+    const response = await instance.get(`${ROUTES.COLLECTION}${id}`);
     return response.data;
+}
+
+export const discoverMovies = async (page, language, genres) => {
+    const searchParams = new URLSearchParams({
+        include_adult: false, 
+        page: page,
+        language: language,
+        // sort_by: 'popularity_desc',
+        with_genres: genres.length === 1 ? genres[0] : genres.join(", ")
+    })
+    const response = await instance.get(`${ROUTES.DISCOVER}?${searchParams}`);
+    return response.data
 }
