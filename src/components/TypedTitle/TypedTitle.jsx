@@ -1,17 +1,12 @@
-import { TypeAnimation } from 'react-type-animation';
 import  PropTypes  from "prop-types";
+import { TypingThing } from './TypedTitle.styled';
 
 export const TypedTitle = ({ typing }) => {
+
     return (<>
-        <TypeAnimation
+        <TypingThing
             sequence={typing}
             wrapper='h1'
-            style={
-                {
-                    color: '#440700',
-                    fontSize: '26px'
-                }
-            }
         />
     </>
     )
