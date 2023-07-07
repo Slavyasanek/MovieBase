@@ -6,14 +6,16 @@ export const Form = styled.form`
     flex-direction: row;
     justify-content: center;
     gap: 5px;
-    margin-bottom: 20px;
+    @media screen and (${devices.maxDesktop}) {
+        margin-top: 20px;
+    }
 `
 
 export const Search = styled.input`
     padding: 10px;
     width: 200px;
     border-radius: 8px;
-    background-color: transparent;
+    background-color: ${p =>  p.theme.greyRed};
     border: 2px solid ${props => props.theme.red};
     outline: none;
     font-size: 20px;

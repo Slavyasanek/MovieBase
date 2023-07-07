@@ -12,3 +12,11 @@ export const ListWrapper = styled.ul`
         margin: -8px;
     }
 `
+
+export const Pagination = styled.div`
+    display: flex;
+    flex-direction: column;
+    @media screen and (${devices.desktop}) {
+        min-width: 900px;
+    }
+`;
