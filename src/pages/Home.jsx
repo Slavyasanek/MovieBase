@@ -9,9 +9,6 @@ import { selectGenres, selectIsFiltered, selectLanguage, selectPage, selectStatu
 import { FilterWrapper } from "components/Filters/Filters.styled";
 import { useEffect } from "react";
 import { TrendingMovies, filteringMovies } from "redux/films/operations";
-import { useState } from "react";
-import { typedTitles } from "constants/typedTitles";
-import { LANGUAGES } from "redux/films/constants";
 
 const Home = () => {
     const status = useSelector(selectStatus);
@@ -20,9 +17,6 @@ const Home = () => {
     const isFiltered = useSelector(selectIsFiltered);
     const currentLanguage = useSelector(selectLanguage);
     const genres = JSON.stringify(useSelector(selectGenres))
-    const [title, setTitle] = useState(currentLanguage === LANGUAGES.ENG 
-        ? typedTitles.trendingTodayEng 
-        : typedTitles.trendingTodayUa);
 
     useEffect(() => {
         if (isFiltered) {
@@ -36,7 +30,7 @@ const Home = () => {
         <>
             {status === STATUS.PENDING && <Loader />}
             {status === STATUS.REJECTED && <Error />}
-            <TypedTitle typing={title} />
+            <TypedTitle typing={['Trand', 1000, 'Trending movies of the day']} />
             <FilterWrapper>
                 <Filter />
                 <MovieList />

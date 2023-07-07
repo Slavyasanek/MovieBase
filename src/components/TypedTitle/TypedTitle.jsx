@@ -6,7 +6,6 @@ export const TypedTitle = ({ typing }) => {
     return (<>
         <TypingThing
             sequence={typing}
-            wrapper='h1'
         />
     </>
     )

@@ -2,6 +2,9 @@ import PropTypes from "prop-types";
 import { Link } from 'react-router-dom';
 import { Card, Title, Rate, Poster, PosterWrapper } from "./MovieCard.styled"
 import { imagePath } from "constants";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "redux/films/selectors";
+import { LANGUAGES } from "redux/films/constants";
 
 const cardVariants = {
     initial: { opacity: 0 },
@@ -9,6 +12,7 @@ const cardVariants = {
 }
 
 export const MovieCard = ({ id, poster, title, rate, path }) => {
+    const currentLanguage = useSelector(selectLanguage)
     return (
         <Card
             initial={"initial"}
@@ -23,7 +27,9 @@ export const MovieCard = ({ id, poster, title, rate, path }) => {
                         alt={title} 
                         width="140"
                         loading="lazy" />
-                    <Rate rateType={rate <= 0 ? 'coming' : rate > 6 ? 'good' : 'bad'}>{rate > 0 ? rate.toFixed(1) : 'no rate'}</Rate>
+                    <Rate rateType={rate <= 0 ? 'coming' : rate > 6 ? 'good' : 'bad'}>
+                        {rate > 0 ? rate.toFixed(1) 
+                        : (currentLanguage === LANGUAGES.ENG ? 'no rate' : 'скоро')}</Rate>
                 </PosterWrapper>
             </Link>
             <Title>{title}</Title>
