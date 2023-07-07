@@ -9,7 +9,7 @@ export const HeaderWrapper = styled.header`
     padding-bottom: 20px;
     position: relative;
     z-index: 99;
-    width: 100vw;
+    width: 100%;
 `
 
 export const HeaderFlex = styled.div`
