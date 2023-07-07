@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, GlobalStyle } from 'constants';
 import { useSelector } from "react-redux";
 import { selectTheme } from "redux/theme/selectors";
-import { THEME } from "redux/theme/slice";
+import { THEME } from "redux/theme/constants";
 
 const Home = lazy(() => import('../pages/Home'));
 const MovieDetails = lazy(() => import("../pages/MovieDetails"));

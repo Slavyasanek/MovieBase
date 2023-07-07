@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { SwitcherButton, SwitcherInput, SwitcherTrack } from "./ThemeSwitcher.styled";
 import {BsSun, BsMoonStars} from 'react-icons/bs';
-import { THEME, setTheme } from "redux/theme/slice";
+import { setTheme } from "redux/theme/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTheme } from "redux/theme/selectors";
+import { THEME } from "redux/theme/constants";
 
 export const ThemeSwitcher = () => {
     const currentTheme = useSelector(selectTheme);
