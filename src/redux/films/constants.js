@@ -4,3 +4,8 @@ export const STATUS = {
     REJECTED: 'rejected',
     RESOLVED: 'resolved'
 }
+
+export const LANGUAGES = {
+    ENG: 'en',
+    UA: 'uk'
+}

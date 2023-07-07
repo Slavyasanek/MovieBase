@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { STATUS } from "./constants"
+import { LANGUAGES, STATUS } from "./constants"
 import { TrendingMovies, filteringMovies } from "./operations"
 
 const filmsSlice = createSlice({
@@ -7,7 +7,7 @@ const filmsSlice = createSlice({
     initialState: {
         movies: [],
         status: STATUS.IDLE,
-        language: 'en-US',
+        language: LANGUAGES.ENG,
         query: '',
         page: 1,
         total_pages: 1,
