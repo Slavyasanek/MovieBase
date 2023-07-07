@@ -14,11 +14,22 @@ export const devices = {
     desktop: `min-width: ${size.desktop}`
 }
 
-export const theme = Object.freeze({
+export const lightTheme = Object.freeze({
     mainFont: '#000000',
     red: '#890f01',
     darkRed: '#440700',
-    decorativeLight: '	#eeeeee',
+    decorativeLight: '#eeeeee',
     beige: '#e7cfcc',
-    darkGreen: '#295f48'
+    greyRed: '	#ae3333',
+    greyPink: '	#e1aaaa'
+})
+
+export const darkTheme = Object.freeze({
+    mainFont: '#DDE6ED',
+    red: '#393053',
+    darkRed: '#443C68',
+    decorativeLight: '#18122B',
+    beige: '#DDE6ED',
+    greyRed: '	#635985',
+    greyPink: '	#E5383B'
 })
