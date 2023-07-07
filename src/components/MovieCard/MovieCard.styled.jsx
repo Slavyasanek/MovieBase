@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export const Card = styled(motion.li)`
     width: calc((100% - 5px * 4) / 2);
     margin: 5px;
-    background-color: ${props => props.theme.decorativeLight};
+    background-color: transparent;
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1); 
     height: auto;
     @media screen and (${devices.tablet}){
@@ -31,7 +31,7 @@ export const Poster = styled(motion.img)`
         height: 370px;
     } 
     @media screen and (${devices.desktop}) {
-        height: 426px;
+        height: 320px;
     } 
 `
 
@@ -45,15 +45,18 @@ export const Rate = styled.span`
     position: absolute;
     top: 5px;
     right: 5px;
-    color: ${props => props.theme.decorativeLight};
-    padding: 4px;
+    color: ${props => props.theme.beige};
+    padding: 2px 4px;
     border-radius: 8px;
+    border: 1px solid ${props => props.theme.beige};
     ${(props) => {
         switch (props.rateType) {
             case 'good':
                 return `background-color: #295f48;`;
             case 'bad':
                 return `background-color: #440700`;
+            case 'coming': 
+                return 'background-color: rgba(0, 0, 0, 0.5)';
             default:
                 return `background-color: #295f48;`;
         }
