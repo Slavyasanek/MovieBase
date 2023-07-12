@@ -9,7 +9,7 @@ import { THEME } from "redux/theme/constants";
 
 const Home = lazy(() => import('../pages/Home'));
 const MovieDetails = lazy(() => import("../pages/MovieDetails"));
-const Movies = lazy(() => import("../pages/Movies"));
+const Search = lazy(() => import("../pages/Search"));
 const Cast = lazy(() => import("./Cast/Cast"));
 const Reviews = lazy(() => import('./Reviews/Reviews'))
 const Trailer = lazy(() => import('./Trailer/Trailer'));
@@ -25,7 +25,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
-          <Route path="movies" element={<Movies />} />
+          <Route path="search" element={<Search />} />
           <Route path="movies/:movieId" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
