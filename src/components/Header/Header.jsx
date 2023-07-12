@@ -10,6 +10,9 @@ import { useState } from "react";
 import { BiMoviePlay } from 'react-icons/bi';
 import { FiSettings } from 'react-icons/fi'
 import { RxHamburgerMenu } from 'react-icons/rx';
+import { useSelector } from "react-redux";
+import { LANGUAGES } from "redux/films/constants";
+import { selectLanguage } from "redux/films/selectors";
 
 const SettingAppearance = {
     initial: { opacity: 0 },
@@ -18,6 +21,7 @@ const SettingAppearance = {
 }
 
 export const Header = () => {
+    const currentLanguage = useSelector(selectLanguage);
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const matches = useMediaQuery("(max-width: 767px)");
     const [isOpenSettings, setIsOpenSettings] = useState(false);
@@ -36,8 +40,8 @@ export const Header = () => {
                             </Logo>
                             {matches && <MobileButton onClick={handleOpen} disabled={isOpenMenu ? true : false}><RxHamburgerMenu /></MobileButton>}
                             {!matches && <Nav>
-                                <Link to="/">Home</Link>
-                                <Link to="/movies">Popular</Link>
+                                <Link to="/">{currentLanguage === LANGUAGES.ENG ? "Home" : 'Головна'}</Link>
+                                <Link to="/movies">{currentLanguage === LANGUAGES.ENG ? "Popular" : 'Популярне'}</Link>
                                 <Link to>Actors</Link>
                             </Nav>}
                         </NavContainer>

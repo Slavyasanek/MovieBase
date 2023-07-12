@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import { TypedTitle } from "components/TypedTitle/TypedTitle";
 import { MovieWrapper, Poster, MovieData, MovieDetail, Slogan, PosterWrapper, Company, CompaniesList, HomepageLink } from "./Movie.styled"
 import { imagePath } from "constants";
+import { Title } from "components/Title/Title";
 
 export const Movie = ({ film }) => {
     const { poster_path, genres, overview, title, original_title, homepage, production_companies, release_date, tagline, backdrop_path} = film;
@@ -14,7 +14,7 @@ export const Movie = ({ film }) => {
         </PosterWrapper>
         <MovieData>
             <li key={'title'}>
-                <TypedTitle typing={[1000, `${title}`]} />
+                <Title sequence={`${title}`} />
             </li>
             {tagline && <Slogan key={'tag'}>
                 {tagline}

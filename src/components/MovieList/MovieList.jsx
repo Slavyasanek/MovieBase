@@ -6,19 +6,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectMovies, selectTotalPages, selectIsFiltered} from "redux/films/selectors";
 import ReactPaginate from 'react-paginate';
 import css from 'components/Pagination/Pagination.module.css';
-import { setPage } from "redux/films/filmsSlice";
+import { setPage} from "redux/films/filmsSlice";
 import { useEffect, useRef } from "react";
 
 export const MovieList = () => {
+    const dispatch = useDispatch();
     const location = useLocation();
-    const [searchParams, setSearchParams] = useSearchParams({ page: 1 });
+
+    const [searchParams, setSearchParams] = useSearchParams({ page: 1});
+
     const currentPage = Number(searchParams.get("page"));
     const [paginationPage, setPaginationPage] = useState(0);
+
     const movies = useSelector(selectMovies);
     const totalPages = useSelector(selectTotalPages);
-    const dispatch = useDispatch();
     const isFiltered = useSelector(selectIsFiltered);
-    const isFilteredRef = useRef(isFiltered)
+    const isFilteredRef = useRef(isFiltered);
 
     const pagesCount = Math.ceil(totalPages) > 500 ? 500 : Math.ceil(totalPages);
 
@@ -28,12 +31,12 @@ export const MovieList = () => {
             setSearchParams({ page: 1 });
             setPaginationPage(0);
             isFilteredRef.current = isFiltered;
-
         }
     }, [isFiltered, dispatch, setSearchParams])
 
     useEffect(() => {
-        dispatch(setPage(currentPage));
+        const page = currentPage === 0 ? 1 : currentPage
+        dispatch(setPage(page));
     }, [dispatch, currentPage])
 
     const loadMore = (event) => {
