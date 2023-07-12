@@ -1,11 +1,9 @@
 import { MovieCard } from "components/MovieCard/MovieCard"
-import { ListWrapper, Pagination } from "./MovieList.styled";
+import { ListWrapper, MoviePagination, Pagination } from "./MovieList.styled";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMovies, selectTotalPages, selectIsFiltered} from "redux/films/selectors";
-import ReactPaginate from 'react-paginate';
-import css from 'components/Pagination/Pagination.module.css';
 import { setPage} from "redux/films/filmsSlice";
 import { useEffect, useRef } from "react";
 
@@ -57,13 +55,13 @@ export const MovieList = () => {
                     path={{ from: location }}
                 />))}
             </ListWrapper>
-            {movies.length > 0 && <ReactPaginate
-                containerClassName={css.pagination__container}
-                pageClassName={css.pagination__page}
-                activeClassName={css.selected}
-                previousClassName={css.pagination__arrow}
-                nextClassName={css.pagination__arrow}
-                disabledClassName={css.disabled}
+            {movies.length > 0 && <MoviePagination
+                // containerClassName={css.pagination__container}
+                // pageClassName={css.pagination__page}
+                // activeClassName={css.selected}
+                // previousClassName={css.pagination__arrow}
+                // nextClassName={css.pagination__arrow}
+                // disabledClassName={css.disabled}
                 breakLabel="..."
                 nextLabel=">>"
                 onPageChange={loadMore}
