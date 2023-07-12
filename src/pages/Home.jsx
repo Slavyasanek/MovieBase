@@ -1,7 +1,6 @@
 import { Loader } from "components/Loader/Loader";
 import { MovieList } from "components/MovieList/MovieList";
 import { STATUS } from "constants";
-import { TypedTitle } from "components/TypedTitle/TypedTitle";
 import { Error } from "components/Error/Error";
 import { Filter } from "components/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +8,8 @@ import { selectGenres, selectIsFiltered, selectLanguage, selectPage, selectStatu
 import { FilterWrapper } from "components/Filters/Filters.styled";
 import { useEffect } from "react";
 import { TrendingMovies, filteringMovies } from "redux/films/operations";
+import { Title } from "components/Title/Title";
+import { LANGUAGES } from "redux/films/constants";
 
 const Home = () => {
     const status = useSelector(selectStatus);
@@ -30,7 +31,9 @@ const Home = () => {
         <>
             {status === STATUS.PENDING && <Loader />}
             {status === STATUS.REJECTED && <Error />}
-            <TypedTitle typing={['Trand', 1000, 'Trending movies of the day']} />
+            <Title sequence={currentLanguage === LANGUAGES.ENG ?
+                'Trending movies of the day'
+                : 'Сьогодні у тренді'} />
             <FilterWrapper>
                 <Filter />
                 <MovieList />

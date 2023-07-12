@@ -1,4 +1,4 @@
-import { discoverMovies, getTrendingMovies } from "helpers/api";
+import { discoverMovies, getTrendingMovies, searchMovies } from "helpers/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const TrendingMovies = createAsyncThunk(
@@ -23,12 +23,12 @@ async(_, thunkAPI) => {
     }
 })
 
-// export const searchingMovies = createAsyncThunk('films/search',
-//     async (_, thunkAPI) => {
-//         try {
-//             const { films: {page, query} } = thunkAPI.getState()
-//             return await searchingMovies(query, page)
-//         } catch (e) {
-//             return thunkAPI.rejectWithValue(e.message);
-//         }
-//     })
+export const searchingMovies = createAsyncThunk('films/search',
+    async (_, thunkAPI) => {
+        try {
+            const { films: {page, query, language} } = thunkAPI.getState()
+            return await searchMovies(query, page, language)
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    })

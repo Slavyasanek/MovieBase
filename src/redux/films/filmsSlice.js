@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { LANGUAGES, STATUS } from "./constants"
-import { TrendingMovies, filteringMovies } from "./operations"
+import { TrendingMovies, filteringMovies, searchingMovies } from "./operations"
 
 const filmsSlice = createSlice({
     name: 'films',
@@ -12,7 +12,8 @@ const filmsSlice = createSlice({
         page: 1,
         total_pages: 1,
         genres: [],
-        isFiltered: false
+        isFiltered: false,
+        year: null,
     },
     reducers: {
         setLanguage(state, action) {
@@ -37,6 +38,12 @@ const filmsSlice = createSlice({
         },
         setFilter(state, action) {
             state.isFiltered = action.payload;
+        },
+        setQuery(state, action) {
+            state.query = action.payload;
+        },
+        setYear(state, action) {
+            state.year = action.payload;
         }
     },
     extraReducers: builder => {
@@ -68,8 +75,23 @@ const filmsSlice = createSlice({
                 state.status = STATUS.REJECTED;
                 state.movies = [];
             })
+            .addCase(searchingMovies.pending, (state) => {
+                state.status = STATUS.PENDING;
+                state.movies = [];
+                state.genres = [];
+                state.isFiltered = false;
+            })
+            .addCase(searchingMovies.fulfilled, (state, action) => {
+                state.movies = action.payload.results;
+                state.status = STATUS.RESOLVED;
+                state.total_pages = action.payload.total_pages;
+            })
+            .addCase(searchingMovies.rejected, (state) => {
+                state.status = STATUS.REJECTED;
+                state.movies = [];
+            })
     }
 })
 
-export const { setPage, setLanguage, toggleGenre, deleteAllGenres } = filmsSlice.actions;
+export const { setPage, setLanguage, toggleGenre, deleteAllGenres, setQuery, setYear } = filmsSlice.actions;
 export const filmsReducer = filmsSlice.reducer;

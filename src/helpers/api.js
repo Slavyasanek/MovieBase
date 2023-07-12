@@ -10,10 +10,11 @@ export const getTrendingMovies = async (page = 1, language = 'en-US') => {
     return response.data;
 }
 
-export const searchMovies = async (query, page = 1) => {
+export const searchMovies = async (query, page = 1, language) => {
     const searchParams = new URLSearchParams({
         query: query, 
-        page: page
+        page: page,
+        language: language
     })
     const response = await instance.get(`${ROUTES.SEARCH}?${searchParams}`);
     return response.data
@@ -54,7 +55,6 @@ export const discoverMovies = async (page, language, genres) => {
         include_adult: false, 
         page: page,
         language: language,
-        // sort_by: 'popularity_desc',
         with_genres: genres.length === 1 ? genres[0] : genres.join(", ")
     })
     const response = await instance.get(`${ROUTES.DISCOVER}?${searchParams}`);

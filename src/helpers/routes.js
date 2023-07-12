@@ -1,6 +1,6 @@
 export const ROUTES = {
     TRENDING: '/trending/movie/day',
-    SERAHC: '/search/movie',
+    SEARCH: '/search/movie',
     MOVIE: '/movie/',
     COLLECTION: '/collection/',
     DISCOVER: '/discover/movie'

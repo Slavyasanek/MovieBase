@@ -21,6 +21,7 @@ export const FilterColumn = styled.div`
         position: sticky;
         top: 20px;
         height: 100%;
+        max-width: 300px;
     }
 `;
 
