@@ -7,10 +7,13 @@ import { OddInfo } from "components/OddInfo/OddInfo";
 import { Error } from "components/Error/Error";
 import { STATUS } from "constants";
 import { getMovie } from "helpers/api";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "redux/films/selectors";
 
 const MovieDetails = () => {
     const [movie, setMovie] = useState(null);
     const [status, setStatus] = useState(STATUS.IDLE);
+    const language = useSelector(selectLanguage)
     const { movieId } = useParams();
     const location = useLocation();
     const backLink = useRef([location.state?.from || '/']);
@@ -28,7 +31,7 @@ const MovieDetails = () => {
         setStatus(STATUS.PENDING);
         async function getFilm() {
             try {
-                const movie = await getMovie(movieId);
+                const movie = await getMovie(movieId, language);
                 setMovie(movie);
                 setStatus(STATUS.RESOLVED);
             } catch (e) {
@@ -36,7 +39,7 @@ const MovieDetails = () => {
             }
         }
         getFilm()
-    }, [movieId])
+    }, [movieId, language])
 
     const reduceLocation = () => {
         backLink.current.pop();

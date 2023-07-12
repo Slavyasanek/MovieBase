@@ -8,6 +8,9 @@ import { useParams } from "react-router-dom"
 import { ReviewsList } from "./Reviews.styled";
 import { ReviewItem } from "components/ReviewItem/ReviewItem";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "redux/films/selectors";
+import { LANGUAGES } from "redux/films/constants";
 
 const reviewVariants = {
     initial: { opacity: 0 },
@@ -17,13 +20,14 @@ const reviewVariants = {
 const Reviews = () => {
     const [reviews, setReviews] = useState([]);
     const [status, setStatus] = useState(STATUS.IDLE);
+    const language = useSelector(selectLanguage);
     const { movieId } = useParams();
 
     useEffect(() => {
         setStatus(STATUS.PENDING);
         async function getReviews() {
             try {
-                const reviews = await getMovieReviews(movieId);
+                const reviews = await getMovieReviews(movieId, language);
                 const results = reviews.results;
                 const sortedResults = results.filter((review, index, array) => array.map(review => review.author).indexOf(review.author) === index);
                 setReviews(sortedResults);
@@ -33,7 +37,7 @@ const Reviews = () => {
             }
         }
         getReviews();
-    }, [movieId])
+    }, [movieId, language])
     if (status === STATUS.PENDING) {
         return (<Loader />);
     } else if (status === STATUS.REJECTED) {
@@ -43,13 +47,15 @@ const Reviews = () => {
             initial={"initial"}
             animate={"isOn"}
             variants={reviewVariants}>
-            <CastTitle>Reviews</CastTitle>
-            {reviews.length <= 0 ? <p>No reviews available</p> : <ReviewsList>
+            <CastTitle>{language === LANGUAGES.ENG ? 'Reviews' : 'Відгуки'}</CastTitle>
+            {reviews.length <= 0 ? (language === LANGUAGES.ENG ?
+                <p>No reviews available</p>
+                : <p>Немає відгуків українською</p>) : <ReviewsList>
                 {reviews.map(review => (<ReviewItem overview={review} key={review.id} />))}
             </ReviewsList>}
         </motion.div>)
     } else if (status === STATUS.IDLE) {
-        return (<CastTitle>Reviews</CastTitle>)
+        return (<CastTitle>{language === LANGUAGES.ENG ? 'Reviews' : 'Відгуки'}</CastTitle>)
     }
 }
 

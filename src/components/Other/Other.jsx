@@ -8,6 +8,9 @@ import { Error } from "components/Error/Error";
 import { Loader } from "components/Loader/Loader";
 import { RecommendationList } from "components/RecommendationItem/RecommendationItem.styled";
 import { RecommendationItem } from "components/RecommendationItem/RecommendationItem";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "redux/films/selectors";
+import { LANGUAGES } from "redux/films/constants";
 
 const variants = {
     initial: { opacity: 0 },
@@ -18,13 +21,14 @@ const Other = () => {
     const { partsId } = useParams();
     const [status, setStatus] = useState(STATUS.IDLE);
     const [collection, setCollection] = useState([]);
+    const language = useSelector(selectLanguage);
     const location = useLocation();
 
     useEffect(() => {
         setStatus(STATUS.PENDING);
         async function fetchData() {
             try {
-                const collection = await getMovieCollection(partsId);
+                const collection = await getMovieCollection(partsId, language);
                 setCollection(collection.parts);
                 setStatus(STATUS.RESOLVED);
             } catch (e) {
@@ -32,9 +36,9 @@ const Other = () => {
             }
         }
         fetchData();
-    }, [partsId])
+    }, [partsId, language])
     if (status === STATUS.IDLE) {
-        return (<CastTitle>Other parts</CastTitle>)
+        return (<CastTitle>{language === LANGUAGES.ENG ? 'Other parts' : 'Інші частини'}</CastTitle>)
     } else if (status === STATUS.REJECTED) {
         return (<Error />);
     } else if (status === STATUS.PENDING) {
@@ -44,7 +48,7 @@ const Other = () => {
             initial={"initial"}
             animate={"isOn"}
             variants={variants}>
-               <CastTitle>Other parts</CastTitle>
+               <CastTitle>{language === LANGUAGES.ENG ? 'Other parts' : 'Інші частини'}</CastTitle>
                {collection.length > 0 ? <RecommendationList>
                 {collection.map(part => 
                 <RecommendationItem
@@ -53,7 +57,7 @@ const Other = () => {
                 location={location}
                 />)}
                </RecommendationList>
-               : <p>No other parts</p>} 
+               : <p>{language === LANGUAGES.ENG ? 'No other parts' : 'Немає інших частин'}</p>} 
         </motion.div>)
     }
 }

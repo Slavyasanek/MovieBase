@@ -20,33 +20,51 @@ export const searchMovies = async (query, page = 1, language) => {
     return response.data
 }
 
-export const getMovie = async (id) => {
-    const response = await instance.get(`${ROUTES.MOVIE}${id}`);
+export const getMovie = async (id, language) => {
+    const searchParams = new URLSearchParams({
+        language: language
+    })
+    const response = await instance.get(`${ROUTES.MOVIE}${id}?${searchParams}`);
     return response.data
 }
 
-export const getMovieReviews = async (id) => {
-    const response = await instance.get(`${ROUTES.MOVIE}${id}/reviews`);
+export const getMovieReviews = async (id, language) => {
+        const searchParams = new URLSearchParams({
+        language: language
+    })
+    const response = await instance.get(`${ROUTES.MOVIE}${id}/reviews?${searchParams}`);
     return response.data
 }
 
-export const getMovieCredits = async (id) => {
-    const response = await instance.get(`${ROUTES.MOVIE}${id}/credits`);
+export const getMovieCredits = async (id,  language) => {
+    const searchParams = new URLSearchParams({
+        language: language
+    })
+    const response = await instance.get(`${ROUTES.MOVIE}${id}/credits?${searchParams}`);
     return response.data
 }
 
-export const getMovieVideo= async (id) => {
-    const response = await instance.get(`${ROUTES.MOVIE}${id}/videos`);
+export const getMovieVideo= async (id, language) => {
+    const searchParams = new URLSearchParams({
+        language: language
+    })
+    const response = await instance.get(`${ROUTES.MOVIE}${id}/videos?${searchParams}`);
     return response.data
 }
 
-export const getMovieSimilar = async (id) => {
-    const response = await instance.get(`${ROUTES.MOVIE}${id}/similar`);
+export const getMovieSimilar = async (id, language) => {
+    const searchParams = new URLSearchParams({
+        language: language
+    })
+    const response = await instance.get(`${ROUTES.MOVIE}${id}/similar?${searchParams}`);
     return response.data
 }
 
-export const getMovieCollection = async (id) => {
-    const response = await instance.get(`${ROUTES.COLLECTION}${id}`);
+export const getMovieCollection = async (id, language) => {
+    const searchParams = new URLSearchParams({
+        language: language
+    })
+    const response = await instance.get(`${ROUTES.COLLECTION}${id}?${searchParams}`);
     return response.data;
 }
 

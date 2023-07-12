@@ -2,10 +2,14 @@ import PropTypes from "prop-types";
 import { MovieWrapper, Poster, MovieData, MovieDetail, Slogan, PosterWrapper, Company, CompaniesList, HomepageLink } from "./Movie.styled"
 import { imagePath } from "constants";
 import { Title } from "components/Title/Title";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "redux/films/selectors";
+import { LANGUAGES } from "redux/films/constants";
 
 export const Movie = ({ film }) => {
-    const { poster_path, genres, overview, title, original_title, homepage, production_companies, release_date, tagline, backdrop_path} = film;
+    const { poster_path, genres, overview, title, original_title, homepage, production_companies, release_date, tagline, backdrop_path } = film;
     const date = new Date(release_date);
+    const language = useSelector(selectLanguage)
     const formatDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
 
     return (<MovieWrapper back={backdrop_path}>
@@ -21,20 +25,30 @@ export const Movie = ({ film }) => {
             </Slogan>}
             {homepage && <li key={'link'}><HomepageLink href={homepage} target="_blank" rel="noreferrer noopener">Official page</HomepageLink></li>}
             {original_title && <li key={original_title}>
-                <MovieDetail>Original Title:</MovieDetail> {original_title}
+                <MovieDetail>{language === LANGUAGES.ENG
+                    ? "Original Title:"
+                    : 'Оригінальна назва'}</MovieDetail> {original_title}
             </li>}
             {genres.length > 0 && <li key={'genres'}>
-                <MovieDetail>Genres:</MovieDetail> {genres.map(genre => genre.name).join(', ')}
+                <MovieDetail>{language === LANGUAGES.ENG
+                    ? "Genres:"
+                    : 'Жанри'}</MovieDetail> {genres.map(genre => genre.name).join(', ')}
             </li>}
             {release_date && <li key={release_date}>
-                <MovieDetail>Year:</MovieDetail> {formatDate}
+                <MovieDetail>{language === LANGUAGES.ENG
+                    ? "Year:"
+                    : 'Рік'}</MovieDetail> {formatDate}
             </li>}
             {overview && <li key={'description'}>
-                <MovieDetail>Description:</MovieDetail> {overview}
+                <MovieDetail>{language === LANGUAGES.ENG
+                    ? "Description:"
+                    : 'Опис'}</MovieDetail> {overview}
             </li>}
             {production_companies.length > 0 &&
                 <>
-                    <li key={'production'}> <MovieDetail>Production:</MovieDetail></li>
+                    <li key={'production'}> <MovieDetail>{language === LANGUAGES.ENG
+                        ? 'Production:'
+                        : 'Виробництво'}</MovieDetail></li>
                     <li key={'companies'}>
                         <CompaniesList>
                             {production_companies.map(({ logo_path, id }) =>

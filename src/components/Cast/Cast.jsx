@@ -7,6 +7,9 @@ import { imagePath, STATUS } from "constants";
 import { MovieDetail } from "components/Movie/Movie.styled";
 import { Loader } from "components/Loader/Loader";
 import { Error } from "components/Error/Error";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "redux/films/selectors";
+import { LANGUAGES } from "redux/films/constants";
 
 const castVariants = {
     initial: { opacity: 0 },
@@ -17,13 +20,14 @@ const castVariants = {
 const Cast = () => {
     const [cast, setCast] = useState([]);
     const [status, setStatus] = useState(STATUS.IDLE);
+    const language = useSelector(selectLanguage);
     const { movieId } = useParams();
 
     useEffect(() => {
         setStatus(STATUS.PENDING);
         async function getCast() {
             try {
-                const result = await getMovieCredits(movieId);
+                const result = await getMovieCredits(movieId, language);
                 setStatus(STATUS.RESOLVED);
                 setCast(result.cast);
             } catch (e) {
@@ -31,7 +35,7 @@ const Cast = () => {
             }
         }
         getCast();
-    }, [movieId])
+    }, [movieId, language]);
     if (status === STATUS.PENDING) {
         return (<Loader />)
     } else if (status === STATUS.RESOLVED || status === STATUS.IDLE) {
@@ -40,7 +44,7 @@ const Cast = () => {
             animate={"isOn"}
             exit={"exit"}
             variants={castVariants}>
-            <CastTitle>Cast</CastTitle>
+            <CastTitle>{language === LANGUAGES.ENG ? "Cast" : 'Актори'}</CastTitle>
             {cast.length > 0 
             ? <CastList>
                 {cast.map(({ id, character, profile_path, name }) => (
@@ -49,10 +53,10 @@ const Cast = () => {
                         src={profile_path ? `${imagePath.default}${profile_path}` : imagePath.sample}
                         alt={character}
                         height={150} />
-                    {name && <ActorCredits><MovieDetail>Name:</MovieDetail> {name}</ActorCredits>}
-                    {character && <ActorCredits><MovieDetail> Character:</MovieDetail> {character}</ActorCredits>}
+                    {name && <ActorCredits><MovieDetail>{language === LANGUAGES.ENG ? 'Name:' : `Ім\x27я:`}</MovieDetail> {name}</ActorCredits>}
+                    {character && <ActorCredits><MovieDetail> {language === LANGUAGES.ENG ? 'Character:' : 'Персонаж:'}</MovieDetail> {character}</ActorCredits>}
                 </Actor>))}
-            </CastList> : <p>No cast info</p>}
+            </CastList> : <p>{language === LANGUAGES.ENG ? 'No cast info' : 'Немає інформації'}</p>}
         </motion.div>)
     } else if (status === STATUS.REJECTED) {
         return (<Error />)

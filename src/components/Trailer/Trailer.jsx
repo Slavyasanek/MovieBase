@@ -7,6 +7,9 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import { Video } from "./Trailer.styled";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { selectLanguage } from "redux/films/selectors";
+import { LANGUAGES } from "redux/films/constants";
 
 const trailerVariants = {
     initial: { opacity: 0 },
@@ -16,13 +19,16 @@ const trailerVariants = {
 const Trailer = () => {
     const [trailer, setTrailer] = useState(null);
     const [status, setStatus] = useState(STATUS.IDLE);
+    const language = useSelector(selectLanguage);
     const { movieId } = useParams();
+
     useEffect(() => {
         setStatus(STATUS.PENDING)
         async function fetchData() {
             try {
-                const videos = await getMovieVideo(movieId)
-                const trailer = videos.results.find(({ name }) => name.toLowerCase().includes('official trailer'));
+                const videos = await getMovieVideo(movieId, language);
+                const keyword = language === LANGUAGES.ENG ? 'official trailer' : 'офіційний трейлер';
+                const trailer = videos.results.find(({ name }) => name.toLowerCase().includes(keyword));
                 setTrailer(trailer);
                 setStatus(STATUS.RESOLVED);
             } catch (e) {
@@ -31,7 +37,8 @@ const Trailer = () => {
             }
         }
         fetchData()
-    }, [movieId])
+    }, [movieId, language])
+
     if (status === STATUS.REJECTED) {
         return (<Error />);
     } else if (status === STATUS.PENDING) {
@@ -43,7 +50,7 @@ const Trailer = () => {
             initial={"initial"}
             animate={"isOn"}
             variants={trailerVariants}>
-            <CastTitle>Official Trailer</CastTitle>
+            <CastTitle>{language === LANGUAGES.ENG ? 'Official Trailer' : 'Офіційний трейлер'}</CastTitle>
             {trailer ?
                 <Video
                     src={`https://www.youtube.com/embed/${trailer.key}`}
@@ -52,7 +59,7 @@ const Trailer = () => {
                     allowFullScreen
                     referrerPolicy="no-referrer"
                 ></Video>
-                : <p>No trailer available</p>}
+                : <p>{language === LANGUAGES.ENG ? 'No trailer available' : 'Немає трейлеру'}</p>}
         </motion.div>)
     }
 }

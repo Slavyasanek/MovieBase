@@ -48,7 +48,7 @@ export const MoviePagination = styled(ReactPaginate)`
         color: ${p => p.theme.beige};
     }
     li.disabled a {
-        background-color: ${p => p.theme.mainFont};
-        color: #e7e7e7;
+        background-color: transparent;
+        color: ${p => p.theme.red};
     }
 `;
