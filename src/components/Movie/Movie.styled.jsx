@@ -32,6 +32,9 @@ export const MovieWrapper = styled.div`
     @media screen and (${devices.tablet}) {
         background-attachment: fixed;
     }
+    @media screen and (${devices.maxDesktop}) {
+        display: none;
+    }
 }
 `
 export const PosterWrapper = styled.div`

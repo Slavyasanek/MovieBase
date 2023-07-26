@@ -7,6 +7,7 @@ import { selectLanguage } from "redux/films/selectors";
 import { LANGUAGES } from "redux/films/constants";
 
 export const Movie = ({ film }) => {
+    console.log(film);
     const { poster_path, genres, overview, title, original_title, homepage, production_companies, release_date, tagline, backdrop_path } = film;
     const date = new Date(release_date);
     const language = useSelector(selectLanguage)

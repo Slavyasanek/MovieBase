@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const BtnBack = styled(Link)`
     background-color: ${props => props.theme.darkRed};
-    color: ${props => props.theme.decorativeLight};
+    color: ${props => props.theme.beige};
     padding: 5px 15px;
     border-radius: 16px;
     margin-bottom: 20px;

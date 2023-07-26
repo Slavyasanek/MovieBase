@@ -68,13 +68,22 @@ export const getMovieCollection = async (id, language) => {
     return response.data;
 }
 
-export const discoverMovies = async (page, language, genres) => {
+export const discoverMovies = async (page, language, genres, year) => {
     const searchParams = new URLSearchParams({
         include_adult: false, 
         page: page,
         language: language,
-        with_genres: genres.length === 1 ? genres[0] : genres.join(", ")
+        with_genres: genres.length === 1 ? genres[0] : genres.join(", "),
+        year: year
     })
     const response = await instance.get(`${ROUTES.DISCOVER}?${searchParams}`);
     return response.data
 }
+
+export const getTopRated = async (language) => {
+    const searchParams = new URLSearchParams({
+        language: language
+    })
+    const response = await instance.get(`${ROUTES.POPULAR}?${searchParams}`);
+    return response.data;
+};

@@ -13,3 +13,5 @@ export const selectIsFiltered = state => state.films.isFiltered;
 export const selectLanguage = state => state.films.language;
 
 export const selectQuery = state => state.films.query;
+
+export const selectYear = state => state.films.year;

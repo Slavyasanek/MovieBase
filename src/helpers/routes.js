@@ -3,5 +3,6 @@ export const ROUTES = {
     SEARCH: '/search/movie',
     MOVIE: '/movie/',
     COLLECTION: '/collection/',
-    DISCOVER: '/discover/movie'
+    DISCOVER: '/discover/movie',
+    POPULAR: '/movie/popular'
 }

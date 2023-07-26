@@ -27,8 +27,12 @@ const Trailer = () => {
         async function fetchData() {
             try {
                 const videos = await getMovieVideo(movieId, language);
-                const keyword = language === LANGUAGES.ENG ? 'official trailer' : 'офіційний трейлер';
-                const trailer = videos.results.find(({ name }) => name.toLowerCase().includes(keyword));
+                let trailer;
+                if (language === LANGUAGES.ENG) {
+                    trailer = videos.results.find(({ name }) => name.toLowerCase().includes('trailer'));
+                } else if (language === LANGUAGES.UA) {
+                    trailer = videos.results.find(({ name }) => name.toLowerCase().includes('трейлер'))
+                }
                 setTrailer(trailer);
                 setStatus(STATUS.RESOLVED);
             } catch (e) {

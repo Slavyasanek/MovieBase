@@ -75,17 +75,21 @@ export const PopularButton = styled.button`
     &:hover, &:focus, &:active {
         background-color: ${p => p.theme.darkRed};
     }
+    &:disabled {
+        cursor: auto;
+        pointer-events: none;
+    }
 `
 
 
 export const FilterContainer = styled(motion.div)`
-    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     background-color: ${p => p.theme.decorativeLight};
+    overflow-y: scroll;
     &::-webkit-scrollbar-track {
         background-color: transparent;
     }
     &::-webkit-scrollbar {
-        width: 8px;
+        width: 5px;
     }
     &::-webkit-scrollbar-thumb {
         border-radius: 12px;
@@ -96,15 +100,16 @@ export const FilterContainer = styled(motion.div)`
         top: 0;
         left: 0;
         z-index: 10000;
-        overflow-y: scroll;
         height: 100%;
-        padding: 20px 50px 10px 20px;
+        padding: 20px 50px 20px 20px;
     }
     @media screen and (${devices.tablet}) {
         max-width: 400px;
     }
     @media screen and (${devices.desktop}) {
         background-color: transparent;
+        height: 100%;
+        max-height: calc(100vh - 20px);
     }
 `;
 
@@ -112,6 +117,7 @@ export const FilterTitle = styled.p`
     font-size: 22px;
     font-weight: 700;
     color: ${p => p.theme.greyRed};
+    padding-left: 7px;
     @media screen and (${devices.tablet}) {
         font-size: 26px;
     }
@@ -139,7 +145,6 @@ export const FilterList = styled.ul`
     }
     @media screen and (${devices.desktop}) {
         gap: 10px;
-        border-right: 2px solid ${p => p.theme.red};
         padding: 10px 0;
     }
 `;
@@ -149,8 +154,29 @@ export const Genre = styled.li`
     padding: 3px 7px;
     border-radius: 5px;
     width: fit-content;
+    font-size: 20px;
+    @media screen and (${devices.desktop}) {
+        font-size: 18px;
+    }
     &.selected {
         background-color: ${p => p.theme.darkRed};
         color: ${p => p.theme.beige};
     }
 `;
+
+export const YearButton = styled.button`
+    width: 60px;
+    background-color: ${p => p.theme.red};
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    padding: 7px;
+    font-size: 12px;
+    color: ${p => p.theme.beige};
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    margin-top: 8px;
+    &:hover, &:focus, &:active {
+        background-color: ${p => p.theme.darkRed};
+    }
+`

@@ -7,7 +7,7 @@ margin-bottom: 20px;`
 
 export const OptionTitle = styled.p`
     font-size: 20px;
-    color: ${props => props.theme.darkRed};
+    color: ${props => props.theme.mainFont};
     margin-bottom: 10px;
     font-weight: 700;
 `

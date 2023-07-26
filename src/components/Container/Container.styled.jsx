@@ -18,6 +18,6 @@ export const Container = styled.div`
 `
 
 export const Main = styled.main`
-    padding-top: 80px;
+    padding-top: 30px;
     padding-bottom: 80px;
 `

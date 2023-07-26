@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { LANGUAGES, STATUS } from "./constants"
-import { TrendingMovies, filteringMovies, searchingMovies } from "./operations"
+import { TrendingMovies, filteringMovies, getPopular, searchingMovies } from "./operations"
 
 const filmsSlice = createSlice({
     name: 'films',
@@ -14,6 +14,7 @@ const filmsSlice = createSlice({
         genres: [],
         isFiltered: false,
         year: null,
+        popular: []
     },
     reducers: {
         setLanguage(state, action) {
@@ -42,9 +43,15 @@ const filmsSlice = createSlice({
         setQuery(state, action) {
             state.query = action.payload;
         },
-        setYear(state, action) {
-            state.year = action.payload;
-        }
+        toggleYear(state, action) {
+            if (state.year === action.payload) {
+                state.isFiltered = false;
+                state.year = null;
+            } else {
+                state.isFiltered = true;
+                state.year = action.payload;
+            }
+        },
     },
     extraReducers: builder => {
         builder
@@ -90,8 +97,12 @@ const filmsSlice = createSlice({
                 state.status = STATUS.REJECTED;
                 state.movies = [];
             })
+            .addCase(getPopular.pending, (state) => {
+                state.status = STATUS.PENDING;
+                state.popular = [];
+            })
     }
 })
 
-export const { setPage, setLanguage, toggleGenre, deleteAllGenres, setQuery, setYear } = filmsSlice.actions;
+export const { setPage, setLanguage, toggleGenre, deleteAllGenres, setQuery,  toggleYear } = filmsSlice.actions;
 export const filmsReducer = filmsSlice.reducer;

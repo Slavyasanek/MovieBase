@@ -41,7 +41,7 @@ export const Header = () => {
                             {matches && <MobileButton onClick={handleOpen} disabled={isOpenMenu ? true : false}><RxHamburgerMenu /></MobileButton>}
                             {!matches && <Nav>
                                 <Link to="/">{currentLanguage === LANGUAGES.ENG ? "Home" : 'Головна'}</Link>
-                                <Link to="/movies">{currentLanguage === LANGUAGES.ENG ? "Popular" : 'Популярне'}</Link>
+                                <Link to="/upcoming">{currentLanguage === LANGUAGES.ENG ? "Upcoming" : 'Очікуються'}</Link>
                                 <Link to>Actors</Link>
                             </Nav>}
                         </NavContainer>
